@@ -1,0 +1,29 @@
+page-tests {
+	ion-item{
+		padding: 15px !important;
+		padding-bottom: 0px !important;
+		padding-top: 0px !important;
+		border: 1px solid #999!important;
+		border-radius: 15px;
+		margin-bottom:15px !important;
+		
+		.item-inner{
+			border-bottom:none !important;
+		}
+	}
+	.respuesta-q{
+		text-align: center;
+		border: 1px solid #d8cfcf;
+		background: aliceblue;
+		border-radius: 6px;
+	}
+	
+	.play-ico{
+		color: #9E9E9E;
+	}
+	
+	.play-active{
+		color: #27bef0;
+	}
+	
+}

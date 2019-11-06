@@ -1,0 +1,78 @@
+page-diet {
+    .food-icons{
+        width:30px; 
+        height:30px;
+        margin-left: 13px;
+    }
+    .col-css{
+        text-align: center;
+        font-size: 2rem;
+        border: 1px black solid;
+        padding: 0;
+    }
+    .diet-card{
+        //background-color: #EFEDF0;
+        font-size: 2rem;
+        text-align: center;
+        padding: 0;
+        margin: 0 0 0 0;
+        width: 100%
+    }
+    .diet-card-content{
+        background-color: #A8A8AA;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        padding: 0;
+    }
+    .diet-card-content-no-diet{
+        background-color: #A8A8AA;
+        background: url("../assets/dietbg.png");
+        background-position: center center;
+        background-size: 100% 100%;
+        color: white;
+        font-size: 3rem;
+        padding: 20px !important;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+        padding: 0;
+        height: 75vh;
+    }
+    .food-{
+        margin-left: 20%;
+        width:30px; 
+        height:30px;
+        border-radius: 50%;
+        background-color: white;
+    }
+    .row-css{
+        text-align: center;
+        font-size: 2rem;
+        border-top: 1px black solid;
+        padding: 0;
+    }
+    .portion_class{
+        height: 45vh;
+    }
+    .food-{
+        border-radius: 50%;
+        width: 90px;
+        height: 90px;    
+        margin-left: auto; 
+        margin-right: auto;
+        padding: 7px;
+    }
+
+    .FoodLabel{
+        text-align: center;
+        width: 100%;
+    }
+
+    .info_text{
+        text-align : justify;
+        font-size: 2rem;
+        margin: 5px;
+    }
+}

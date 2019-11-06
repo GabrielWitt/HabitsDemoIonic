@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button class="reminderbuttons" ion-button icon-only (click)="dismiss()">
+        <ion-icon ios="ios-close" md="md-close" isActive="true"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Nuevo Recordatorio
+    </ion-title>
+    <ion-buttons end>
+	  <button *ngIf="canDelete" class="reminderbuttons" ion-button icon-only  color="danger" (click)="deleteAlarm(reminder)" >
+        <ion-icon ios="ios-trash-outline" md="ios-trash-outline" isActive="true"></ion-icon>
+      </button>
+      <button class="reminderbuttons" ion-button icon-only (click)="setReminder()">
+        <ion-icon ios="ios-checkmark" md="md-checkmark" isActive="true"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list radio-group [(ngModel)] ="reminder.name" *ngIf="food">
+      <ion-list-header color="light">
+          Recordatorio de:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Desayuno</ion-label>
+        <ion-radio value="desayuno" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Colación (mañana)</ion-label>
+        <ion-radio value="colacion-manana"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Comida</ion-label>
+        <ion-radio value="comida"></ion-radio>
+      </ion-item>
+      <ion-item>
+          <ion-label>Colación (tarde)</ion-label>
+          <ion-radio value="colacion-tarde"></ion-radio>
+      </ion-item>
+      <ion-item>
+          <ion-label>Cena</ion-label>
+          <ion-radio value="cena"></ion-radio>
+      </ion-item>
+      <ion-item>
+          <ion-label>Otro</ion-label>
+          <ion-radio value="otro"></ion-radio>
+      </ion-item>
+    </ion-list>
+  <ion-list no-border>
+    <ion-list-header color="light" *ngIf="reminder.name === 'otro' || !food">
+      Escribe el nombre de tú alarma:
+    </ion-list-header>
+    <ion-item *ngIf="reminder.name === 'otro' || !food">
+    <ion-input col-12 clearInput [(ngModel)] ="recordatorioOtro"></ion-input>
+  </ion-item>
+    <ion-list-header color="light">
+      Hora:
+    </ion-list-header>
+    <ion-item>
+      <ion-datetime placeholder="No seleccionado"  displayFormat="HH:mm"
+        pickerFormat="HH:mm" [(ngModel)]="reminder.hour" doneText="Aceptar"
+        cancelText="Cancelar"></ion-datetime>
+    </ion-item>
+    <ion-list-header color="light">
+      Repetir:
+    </ion-list-header>
+    <ion-item *ngFor="let dayData of daysArray">
+      <ion-toggle [(ngModel)]="dayData.selected"></ion-toggle>
+      <ion-label>
+        {{ dayData.name }}
+      </ion-label>
+    </ion-item>
+    <ion-item-divider color="light">
+      <ion-row float-right>
+        <ion-col col-12>
+          <button ion-button round color="danger" (click)="dismiss()">CANCELAR</button>
+          <button ion-button round (click)="setReminder()">GUARDAR</button>
+        </ion-col>
+      </ion-row>
+    </ion-item-divider>
+  </ion-list>
+</ion-content>

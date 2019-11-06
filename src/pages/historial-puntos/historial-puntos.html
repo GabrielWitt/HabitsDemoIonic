@@ -1,0 +1,31 @@
+<!--
+  Generated template for the HistorialPuntosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{label.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list *ngIf="pointsservice.historyPoints">
+		<ng-container  *ngFor="let point of pointsservice.historyPoints; let i = index">
+			<ion-item-divider color="light" *ngIf="point.aDay || i ==0">{{point.date | date: 'd' }} {{label.of}} {{monthLabeltranslator(point.date)}}, {{point.date | date: 'yyyy' }}</ion-item-divider>
+			<ion-item >
+				<h2>{{point.name}} </h2>
+				<p> {{point.description}}</p>
+				<p> {{point.date | timeAgo2 }} - {{point.date | date: 'HH:mm' }}</p>
+				<span  item-end> {{point.puntosActuales}} </span>
+			</ion-item>
+		</ng-container>
+		<ion-item >
+		<h2 style="text-align:center"> <a (click)="more()">{{label.getMore}}</a></h2>
+		</ion-item>
+	</ion-list>
+</ion-content>

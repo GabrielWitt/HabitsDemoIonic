@@ -1,0 +1,117 @@
+page-news {
+    .dash_icons{
+        text-align: center;
+        font-size: 1.8rem;
+        margin: 0 0 0 28% !important;
+        padding: 0 !important;
+        color:#CFD3D6;
+    }
+    
+    .dash_icons_active{
+        text-align: center;
+        font-size: 1.8rem;
+        margin: 0 0 0 28% !important;
+        padding: 0 !important;
+        color:#36A2EB !important;
+    }
+    
+    .badge{
+        padding:11px;
+    }
+    
+	ion-note{
+		border: 1px solid;
+		border-radius: 50%;
+	font-size: 1.2rem;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    padding-top: 9px;
+
+		
+	}
+    .img-FP{
+        width: 110px!important;
+        height: 110px!important;
+        background-size: contain!important;
+    }
+    .img-FP-s{
+        width: 90px!important;
+        height: 90px!important;
+    }
+    .img-circle {
+      border-radius: 50%;
+      width: 100%;
+      border: solid 1px #c8c7cc;
+    }
+    
+    .activeClass{
+      color: #000;
+      background-color: #f4f4f4;
+    }
+
+    .medix{
+        width: 48%;
+        margin-left: 1%;
+    }
+
+    .normal{
+        width: 31%;
+        margin-left: 1%;
+    }
+
+    .grayBagde {
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
+    }
+
+    .ranking{
+        padding-left:0px;
+        padding-right:0px;
+    }
+
+    .onSelectedOption{
+        width: 48%; 
+        color: white; 
+        border-bottom: 1px solid white;
+        //color: #488aff; 
+        //text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+        //border-bottom: 1px solid #488aff;
+        font-weight: bold;
+        font-size: 2rem;
+        padding-top: 3%;
+        margin-bottom: 2%;
+    }
+    .notSelectedOption{
+        width: 48%; 
+        color: white; 
+        font-size: 2rem;
+        padding-top: 3%;
+        margin-bottom: 2%;
+    }
+	
+	.active{
+		background-color:#369ee7;
+		
+		ion-note, h2, h3{
+			color: #fff;
+			border-color:#fff;
+		}
+		
+	}
+	
+	ion-item:nth-child(3) .item-inner{
+		
+		border: none !important;
+	}
+	
+	.linea-azul {
+		 border-top: 10px solid #49a2e1; 
+	}
+	
+	ion-item:nth-child(4):not(.linea-azul)  .item-inner{
+		
+		border-top: 0.55px solid #c8c7cc;
+	
+	}
+}

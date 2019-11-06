@@ -1,0 +1,51 @@
+<ion-header no-shadow>
+  <ion-navbar hideBackButton>
+    <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary">{{label.skip}}</button> <!-- '' | translate  -->
+    </ion-buttons>
+	 <ion-title>{{label.title}}</ion-title>
+    <ion-buttons end *ngIf="!showSkip">
+      <button ion-button (click)="startApp()" color="primary">{{label.close}}</button> <!-- '' | translate  -->
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+	
+		  <ion-fab middle left [hidden]="slides2.isBeginning()" >
+				<button ion-fab  (click)="prev()"  style="    color: #2f89c7;background-color: #f0f8ff00;"><ion-icon name="ios-arrow-back" style="font-size: 50px"></ion-icon></button>
+    
+		</ion-fab>
+		
+		  <ion-fab middle right [hidden]="slides2.isEnd()">
+				<button ion-fab  (click)="next()" style="    color: #2f89c7;background-color: #f0f8ff00;"><ion-icon name="ios-arrow-forward" style="font-size: 50px"></ion-icon></button>
+    
+		</ion-fab>
+	
+		  <ion-slides #tutorial pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
+			<ion-slide *ngFor="let slide of slides" padding>
+				<h2 style="text-transform: uppercase;">{{slide.title}}</h2>
+				<h3 style="text-transform: uppercase;">{{slide.text1}}</h3>
+				<img [src]="slide.image" class="slide-image" />
+				<ion-grid>
+					<ion-row *ngFor="let par of slide.text2">
+						<ion-col col-12 style="font-size:2rem; width: 100%">{{par}}</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-slide>
+			<ion-slide>
+			  <img src="assets/imgs/logo.png" style="width:116px; left:0; margin-bottom: 15px;margin-top: 15px;" />
+			  <!-- h2 class="slide-title">{{ 'TUTORIAL_SLIDE4_TITLE' | translate }}</h2 -->
+			<img style="width:116px; left:0; margin-bottom: 15px;margin-top: 15px; padding-bottom: 5%" src="./assets/img/DashboardTutorialButton.png">
+			<h3>{{label.thanks}}</h3>
+			<h4>{{label.line1}}</h4>
+			<h4>{{label.line2}}</h4>
+			<h4>{{label.line3}}</h4>
+			  <button ion-button icon-end large clear (click)="startApp()">
+				{{ TUTORIAL_CONTINUE_BUTTON}}{{label.close}} <!-- '' | translate  -->
+				<ion-icon name="arrow-forward"></ion-icon>
+			  </button>
+			</ion-slide>
+		  </ion-slides>
+			
+</ion-content>

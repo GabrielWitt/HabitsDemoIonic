@@ -1,0 +1,44 @@
+<!--
+  Generated template for the TestsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>AUTOEVALUACIONES</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	
+	<ion-list>
+		<ng-container *ngFor="let test of TestItems ">
+			<ion-item *ngIf="test.type != 'article_test'">
+				<h2>{{test.name}}</h2>
+				<ng-container *ngIf="test.results && test.results.length > 0">
+					<p>Ultimo Resultado</p>
+					
+					<ion-grid>
+					  <ion-row>
+						<ion-col col-4>{{ test.results[0].timestamp | date: "dd - MMM"}}:</ion-col>
+						<ion-col col-4 offset-2 class="respuesta-q" (click)="irAlResult(test)">{{ test.results[0].result }}</ion-col>
+						<ion-col col-2></ion-col>
+					  </ion-row>
+					</ion-grid>
+					
+				</ng-container>
+				<ion-icon class="play-ico" ios="ios-play" md="md-play" item-end (click)="irAlTest(test)" [ngClass]="{'play-active': (test.next >= test.dias_prox)}" style="display:flex">
+					<span *ngIf="test.next < test.dias_prox" item-end style="font-size:12px; position:absolute; margin-right:-10px; margin-top: 30px;"> Faltan {{ test.dias_prox - test.next}} dias</span>
+				</ion-icon>
+				
+				
+			</ion-item>
+		</ng-container>
+		<ion-item *ngIf="TestItems.length == 0"> <p style="white-space: normal;">No hay test disponibles por el momento, vuelva m&aacute;s tarde para ver si hay nuevos </p> </ion-item>
+	</ion-list>
+	
+</ion-content>

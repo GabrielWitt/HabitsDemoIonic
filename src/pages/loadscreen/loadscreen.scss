@@ -1,0 +1,38 @@
+page-loadscreen {
+    ion-content {
+        position: relative;
+        background: url(../assets/FondoLogin.jpg);
+        //background: url('../assets/FondoSign.jpg') no-repeat transparent;
+        background-size: cover;
+        height: 100vh;
+        z-index: 1;
+        background-repeat: repeat-x;
+        //animation: animatedBackground 40s linear infinite;
+    }
+
+    @keyframes animatedBackground {
+        from { background-position: 0 0; }
+        to { background-position: 100% 0; }
+    }
+
+    .logo{
+        margin-top: 50%;
+        margin-bottom: 20%;
+        width: 100%;
+        background-color:transparent;
+        opacity: 1.5;
+    }
+
+    .screen-logo{
+        height: 100vh;
+        width: 100%;
+        padding: 15%;
+    }
+
+    .version{
+        width: 100%;
+        color: white;
+        font-size: 1.2rem;
+        text-align: center;   
+    }
+}

@@ -1,0 +1,57 @@
+chart {
+	.contenedor{
+		background: white;
+	    border-radius: 10px;
+	    margin-bottom: 5px;
+	}
+	.cont{
+		border: solid 1px #aba8a8;
+    	border-radius: 10px;
+    	padding: 8px 0px;
+    	height: 104px;
+	}
+	.pt-10{
+		padding-top: 10px!important;
+	}
+	.col-a{
+		color:black;
+		height: 50%;
+	    position: absolute;
+	    left: 15%;
+	    width: 70%;
+	    text-align: center;
+	    top: 5%;
+	    border: solid 1px #333;
+	    border-radius: 7px;
+	    padding-top: 4px;
+	    line-height: 1;
+	    line-height: 1.2;
+    	font-size: smaller;
+		color:black;
+	}
+
+	.span2{
+		font-weight: normal!important;
+	    font-size: 13px;
+	    font-family: monospace;
+	}
+	.col-b{
+		position: absolute;
+	    top: 65%;
+	    left: 15%;
+	    width: 70%;
+	    text-align: center;
+		color:black;
+
+	    span{
+	    	font-weight: 600;
+			color:black;
+	    }
+	}
+
+	img{
+		width: 30px;
+	    position: absolute;
+	    top: 30%;
+	}
+}

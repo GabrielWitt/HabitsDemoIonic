@@ -1,0 +1,20 @@
+<ion-content no-padding>
+  <div class="screen-logo">
+    <img class="logo" id="IMAGEN" src="./assets/img/LogoHabitsOver.png">
+    <div *ngIf="ready">
+      <div style="height: 3rem; opacity: 0.4;">
+        <progress-bar [progress]="loader" no-padding align-self-center></progress-bar>
+      </div>
+      <div *ngIf="showText" class="version row" style="text-align: center">{{showText}}</div>
+    </div>
+  </div> 
+<ion-footer style="background-color: transparent;">
+  <ion-item style="background-color: transparent;">
+    <ion-row>
+      <ion-col style="padding: 0;" col-12>
+        <div class="version row">App versión: {{AboutData.ios_ver}}</div>
+      </ion-col>
+    </ion-row>      
+  </ion-item>
+</ion-footer> 
+</ion-content>

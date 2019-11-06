@@ -1,0 +1,76 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{chatBotRoom.name}}</ion-title>
+    <ion-buttons end>
+      <button *ngIf="MyUser.uid == chatBotRoom.createdBy && chatBotRoom.type == 'team'" ion-button style="background-color: transparent; color: red; border: solid 1px red; padding: 3px;" (click)="confirmDeleteGroup()"><ion-icon name="close"></ion-icon><img src="./assets/img/dot.png" width="5px">Eliminar</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: #F0EDF4;">
+  <ion-card>
+    <div *ngIf="members.length > 1 && chatBotRoom.type != 'team' &&
+      !chatBotRoom.uid.includes('_informative')">
+      <button ion-button color="dark" outline small (click)="confirmChatGroup()">
+         <ion-icon name="walk"></ion-icon> Salir
+      </button>
+    </div>
+    <div *ngIf="members.length == 1&& chatBotRoom.type != 'team' && (!chatBotRoom.uid.includes('_informative')||MyUser.rol=='admin')">
+      <button ion-button color="dark" outline small (click)="confirmDeleteGroup()">
+         <ion-icon name="close"></ion-icon> Eliminar
+      </button>
+    </div>
+    <div *ngIf="MyUser.uid == chatBotRoom.createdBy && chatBotRoom.type == 'team'">
+      <button ion-button color="dark" outline small (click)="AddMembers()">
+         <ion-icon name="add"></ion-icon> Miembros
+      </button>
+    </div>
+    <img-loader class="img-circle" [src]="chatBotRoom.picture" useImg></img-loader>
+    <ion-card-content>
+      <ion-row>
+        <ion-col col-4>
+          Objetivo: 
+        </ion-col>
+        <ion-col col-8>
+          {{chatBotRoom.description}}
+        </ion-col>
+      </ion-row>
+      <!--<ion-item no-padding class="sil">
+        <ion-label>Silenciar Notificaciones</ion-label>
+        <ion-toggle [hidden]="procesando" [ngModel]="silence" (ngModelChange)="stateChange($event)"  [checked]="silence"></ion-toggle>
+      </ion-item>
+      <ion-spinner [hidden]="!procesando"></ion-spinner>-->
+    </ion-card-content>
+  </ion-card>
+    <div style="height: 5px; background-color: white;"></div>
+    <ion-row style="background-color: #eeeeee; width: 100%"> 
+        <edit-members *ngIf="AddTeam && MyUser.uid == chatBotRoom.createdBy && chatBotRoom.type == 'team'" [members]="members" [group_room]="chatBotRoom"></edit-members>
+    </ion-row>
+    <ion-row *ngIf="!AddTeam" style="background-color: #eeeeee; width: 100%"> 
+        <ion-col col-12 style="text-align: center;">{{members.length}} Miembros</ion-col>
+    </ion-row>
+    <ion-list *ngIf="!AddTeam">
+      <ion-item *ngFor="let user of members" style="background-color: #eeeeee;">
+          <button *ngIf="user.uid == chatBotRoom.createdBy && chatBotRoom.type == 'team'" ion-button color="yellow" outline item-end class="onlinebutton"><ion-icon name="create"></ion-icon><img src="./assets/img/dot.png" width="5px">Admin</button>
+          <button ion-button color="{{user.status.conected_chat?'secondary':'danger'}}" outline item-end class="onlinebutton">{{user.status.conected_chat?'Online':'Offline'}}</button>
+          <button *ngIf="user.uid != chatBotRoom.createdBy && MyUser.uid == chatBotRoom.createdBy && chatBotRoom.type == 'team'" ion-button outline item-end (click)="deleteMember(user)"><ion-icon name="close"></ion-icon></button>
+          <!--<button ion-button color="danger" *ngIf="user.status == 'offline'" outline item-end class="onlinebutton">{{user.status}}</button>
+          div col-12 style="text-align: left;" >
+          </div--> 
+          <ion-avatar item-start col-2 style="margin: 0;">      
+              <img-loader class="img-user" [src]="user.picture" [fallbackUrl]="'./assets/user_icons/icon0.png'" [fallbackAsPlaceholder]="true" [useImg]="true"></img-loader>
+          </ion-avatar>
+        <ion-row>
+          <ion-col>
+            <h2>{{user.name}}</h2>
+            <p>Puntos: {{user.points}}</p>
+            <!--p>Hábitos:</p><button ion-button style="height: 20px;font-size: 1rem;" color="#36B8EA" *ngFor="let goal of user.user_goals">{{goal}}</button-->
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>  
+</ion-content>

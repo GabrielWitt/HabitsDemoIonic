@@ -1,0 +1,77 @@
+page-register {
+	.datetime-ios .datetime-placeholder, .datetime-md .datetime-placeholder{
+		color: #fff;
+	}
+	
+	.datetime-ios , .datetime-md{
+		padding: 11px 8px 11px 0px;
+	}
+    #SearchButton{
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+    }
+
+    ion-content {
+        background: url(../assets/FondoLogin.jpg);
+        background-size: 100% 100%;
+        height: 100vh;
+    }
+
+    ion-item {
+        background-color: rgba(255, 255, 255, 0.5) !important;
+        border-radius: 5px; 
+        padding-left: 5%; 
+        padding-top: 3%; 
+        margin-bottom: 3%;
+        font-size: 1.6rem; 
+        border: 0px; 
+        width: 100%;
+        color: white !important;
+    }
+
+    .toolbar-background { 
+        background-color: transparent
+    }
+    
+    .toolbar-background-ios {
+        background-color: transparent
+    }
+
+    .text-input::-moz-placeholder {
+        color: white;
+    }
+      
+    .text-input:-ms-input-placeholder {
+        color: white;
+    }
+      
+    .text-input::-webkit-input-placeholder {
+        text-indent: 0;
+        color: white;
+    }
+
+    .select-placeholder::-moz-placeholder {
+        color: white;
+    }
+      
+    .select-placeholder:-ms-input-placeholder {
+        color: white;
+    }
+      
+    .select-placeholder::-webkit-input-placeholder {
+        text-indent: 0;
+        color: white;
+    }
+    .select-ios .select-placeholder {
+        color: white;
+    }
+
+    .selectwidthauto {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .alert-ios .alert-radio-label{ white-space: pre-line !important;}
+    .alert-md .alert-radio-label{ white-space: pre-line !important;}
+    .alert-wp .alert-radio-label{ white-space: pre-line !important;}
+}

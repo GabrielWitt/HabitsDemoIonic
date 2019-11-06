@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> {{label.title}} </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+	<!-- PESTAÑA DE MIS GRUPOS-->
+	<ion-list-header>
+	  {{label.myclass}}
+	</ion-list-header>
+	<ng-container *ngFor="let lesson of Lessons index as i" >
+		<div class="item-l" *ngIf="lesson.joined">
+			<ion-item (click)="OpenLesson(lesson)">
+			  <ion-thumbnail item-start>
+				<img-loader [src]="lesson.picture?lesson.picture:'./assets/imgs/class.png'" [fallbackUrl]="'./assets/imgs/class.png'" [fallbackAsPlaceholder]="true"></img-loader>
+			  </ion-thumbnail>
+			  <h2>{{lesson.title}}</h2>
+			  <p>{{lesson.description}}</p>
+			  <h3>{{lesson.advance}}/{{lesson.topic_number}} {{label.class}}</h3>
+			</ion-item>
+		</div>
+	</ng-container>
+	<!-- PESTAÑA DE OTROS GRUPOS-->
+	<ion-list-header>
+	  {{label.otherclass}}
+	</ion-list-header>
+	<ng-container *ngFor="let lesson of Lessons index as i" >
+		<div class="item-l" *ngIf="!lesson.joined" >
+			<ion-item>
+			  <ion-thumbnail item-start>
+				<img-loader [src]="lesson.picture?lesson.picture:'./assets/imgs/class.png'" [fallbackUrl]="'./assets/imgs/class.png'" [fallbackAsPlaceholder]="true"></img-loader>
+			  </ion-thumbnail>
+			  <h2>{{lesson.title}}</h2>
+			  <p>{{lesson.description}}</p>
+			  <h3>{{lesson.topic_number}} {{label.class}}</h3>
+			  <button ion-button color="#36b8ea" outline item-end (click)="subscribeLesson(lesson)">{{label.join}}</button> 
+			</ion-item>
+		</div>
+	</ng-container>
+  </ion-list>
+</ion-content>

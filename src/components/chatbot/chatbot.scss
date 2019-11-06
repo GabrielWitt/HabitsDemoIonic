@@ -1,0 +1,178 @@
+chatbot {
+
+    img{
+        border-radius: 50%;
+    }
+    ion-fab{
+        right: -5px !important;
+        bottom: -5px !important;
+    }
+
+    .toolbar-title {
+        .subtitle {
+            font-size: 60%;
+            margin: 0;
+            font-weight: normal;
+        }
+    }
+   
+    ion-content .scroll-content{
+        background-color: #f0eff5;
+        margin-bottom: 3.5rem !important;
+    }
+
+    
+    ion-scroll {
+        white-space: nowrap;
+        height: 5rem;
+        background-color: #fff;
+    }
+
+     .text-input{ 
+        padding-left: 5px !important;
+        margin: 3px 8px 3px 0 !important;
+        width: calc(100% - 8px)
+    }
+
+    .input-wrap {
+        padding: 5px;
+        display: flex;        
+    }    
+
+    .back-button{
+        visibility: hidden !important;
+        width: 0 !important;
+    }
+
+    .chat-item{
+        background-color: transparent !important;
+    }
+
+    .chat-item ion-avatar[item-left]{
+        margin-right: 0px !important;
+    }
+
+    .chat-item ion-avatar[item-right]{
+        margin-left: 0px !important;
+    }
+
+    .bubble{
+        background-color: #F2F2F2;
+        border-radius: 5px;
+        box-shadow: 0 0 6px #B2B2B2;
+        display: inline-block;
+        padding: 10px 18px;
+        position: relative;
+        vertical-align: middle;
+    }
+
+    .bubble::before{
+        background: #F2F2F2;
+        display: block;
+        height: 16px;
+        position: absolute;
+        top: 11px;
+        transform:              rotate( 29deg ) skew( -35deg );
+            -moz-transform:     rotate( 29deg ) skew( -35deg );
+            -ms-transform:      rotate( 29deg ) skew( -35deg );
+            -o-transform:       rotate( 29deg ) skew( -35deg );
+            -webkit-transform:  rotate( 29deg ) skew( -35deg );
+        width: 20px;
+    }
+
+    .me {
+        color: #36b8ea;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 10px;
+        width: 90%;
+        float: left;
+        margin: 0px 45px 0px 20px;
+        white-space: initial; 
+    }
+    
+    .me::before {
+        box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+        left: -9px;
+    }
+
+    .you {
+        color: #fff !important;
+        background-color: #36b8ea;
+        border-radius: 10px;
+        padding: 10px;
+        width: 90%;
+        float: right;
+        margin: 0px 20px 0px 45px;
+        white-space: initial;
+    }
+    
+    .you::before {
+        box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+        left: -9px;
+    }
+
+    .buttonWindow{
+        background-color: #f0eff5 !important;
+        vertical-align: middle;
+        padding-top: 10px;
+        text-align: center;
+        overflow-x: scroll;
+        width: 100vw;
+        height: 70px;
+    }
+    
+    .optionButton{
+        background-color: transparent; 
+        border: 2px solid #36b8ea;
+        padding-top:3px; 
+        padding-bottom:3px; 
+        padding-left:15px;
+        padding-right:15px; 
+        font-weight: bold;
+        font-size: 1.7rem;
+        font-weight: bold;
+        display: inline-block;
+        border-radius: 20px; 
+        color: #36b8ea !important; 
+        margin-right: 5px; 
+        margin-left: 5px;
+    }    
+    
+    #ButtonBar::-webkit-scrollbar-track
+    {
+        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+    }
+    
+    #ButtonBar::-webkit-scrollbar
+    {
+        width: 5px;
+        background-color: #F5F5F5;
+    }
+    
+    #ButtonBar::-webkit-scrollbar-thumb
+    {
+        background-color: #0ae;        
+        background-image: -webkit-gradient(linear, 0 0, 0 100%,
+                           color-stop(.5, rgba(255, 255, 255, .2)),
+                           color-stop(.5, transparent), to(transparent));
+    }
+
+    .button-chip{
+        color: #fff;
+        background-color: #488aff;
+        border-radius: 16px;
+        height: 32px;
+        font-size: 13px;
+        line-height: 32px;
+        margin: 2px 0;
+
+        ion-label{
+            position: relative;
+        top: -14px;
+        text-align: center;
+        padding: 0px 10px 0px 10px;
+        }
+    }
+}

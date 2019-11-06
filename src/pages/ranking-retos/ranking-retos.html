@@ -1,0 +1,87 @@
+<!--
+  Generated template for the RankingRetosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{retoActual?.name}}</ion-title>
+	  <ion-buttons end>
+		   <button *ngIf="!myTeam && retoActual && retoActual.activo >= 0" ion-button style="color: black; border: solid 1px black; padding: 1px" (click)="nuevoGrupo()">Nuevo equipo</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding >
+	<ng-container *ngIf="retoActual">
+		<div class="panel-head" (click)="nuevoGrupo()">
+			<div class="dias-rest" *ngIf="retoActual && retoActual.activo  > 0"> Dia {{retoActual?.Dias}} de {{retoActual?.Dias_Total}} </div>
+			<div class="dias-rest" *ngIf="retoActual && retoActual.activo < 0"> Finalizó hace {{ (retoActual.activo * -1)}} dias </div>
+			<ng-container *ngIf="!myTeam && retoActual && retoActual.activo >= 0">
+				<button ion-button color="dark" round *ngIf="retoActual.type != 'ranking_individual'">Crea tu equipo</button>
+				<button ion-button color="dark" round *ngIf="retoActual.type == 'ranking_individual'">Unete Al Reto</button>
+			</ng-container>
+			
+			<ng-container *ngIf="!myTeam  && retoActual && retoActual.activo < 0 ">
+				Reto Finalizado
+			</ng-container>
+			<ng-container *ngIf="myTeam  && retoActual && retoActual.type == 'ranking_individual' ">
+				Camina mas de {{retoActual.meta}} pasos en {{retoActual.duracion_label}}
+				
+			</ng-container>
+			<ion-grid *ngIf="myTeam">
+				<ion-row>
+					<ion-col col-6>
+						<ion-item class="myDatos" (click)="selectTeam(myTeam)" *ngIf="retoActual && retoActual.type != 'ranking_individual' ">
+							<img [src]="myTeam.picture">
+							<div class="description">
+								Tu equipo<br>
+								{{retoActual?.pos}}<span>{{retoActual?.pos == 1 || retoActual?.pos ==3? 'er': retoActual?.pos == 2?'do':''}}</span> lugar
+							</div>
+						</ion-item>
+						
+						<ion-item class="myDatos" (click)="selectTeam(myTeam)" *ngIf="retoActual && retoActual.type == 'ranking_individual' ">
+							<div  class="step" *ngIf="myTeam.pasos < retoActual.meta">
+								<ion-icon name="ios-time-outline"></ion-icon>
+							</div>
+							<div  class="step" *ngIf="myTeam.pasos >= retoActual.meta" style="color:#fff; background-color: #289de0">
+								<ion-icon name="checkmark"></ion-icon>
+							</div>
+							<div class="description">
+								{{myTeam.pasos >= retoActual.meta? "Reto cumplido" : "Reto en proceso"}}
+							</div>
+						</ion-item>
+						
+					</ion-col>
+					<ion-col col-6>
+						<ion-item class="myDatos" (click)="selectTeam(myTeam)">
+							<div  class="step">
+								<ion-icon name="walk"></ion-icon>
+							</div>
+							<div  class="description">
+								Pasos Totales<br>
+								{{myTeam.pasos}}
+							</div>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
+		<ion-list *ngIf="retoActual">
+			<ion-item-divider color="light">Equipo <span style="float:rigth">Pasos</span></ion-item-divider>
+			<ng-container  *ngFor="let team of retoActual.teams">
+				<ion-item (click)="selectTeam(team)">
+					<ion-avatar item-start  [ngClass]="{'active':myTeam && team.uid === myTeam.uid}">
+						 <img [src]="team.picture">
+					</ion-avatar>
+					<h2>{{team.name}}</h2>
+					<p> {{team.last_update | timeAgo2 }}</p>
+					 <span  item-end> {{team.pasos}}</span>
+				</ion-item>
+			</ng-container>
+		</ion-list>	
+	</ng-container>
+</ion-content>

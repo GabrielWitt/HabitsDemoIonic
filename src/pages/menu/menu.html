@@ -1,0 +1,81 @@
+<ion-content no-padding style="background-color: #231433;">
+  <ion-grid>
+    <ion-row class="head_css" style="margin-top: 15px;">
+      <img-loader class="img-circle" [src]="user ? user.company.logo : '../assets/placeholder.jpg'" [fallbackUrl]="'./assets/placeholder.jpg'" [fallbackAsPlaceholder]="true"></img-loader>
+    </ion-row>
+    <ion-row class="head_css">
+      <ion-col col-12 style="text-align: center; font-weight: bold; font-size: 2.6rem;">
+        {{user ? user.name : 'Nombre'}} {{user ? user.last_name : "Apellido"}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="option_css" (click)="goToPage('RetoPasosPage')">
+      <ion-icon style="margin-right: 12px;color:#CFD3D6;" name="calendar"></ion-icon><div>Actividades</div>
+    </ion-row>
+    <ion-row class="option_css" (click)="goToPage('MiprogresoPage')">
+      <ion-icon style="margin-right: 12px;color:#CFD3D6;" name="home"></ion-icon><div>Mi progreso</div>
+    </ion-row>
+    <ion-row class="option_css" (click)="goToPage('diet')">
+      <ion-icon style="margin-right: 12px;color:#CFD3D6;" name="restaurant"></ion-icon><div>Dieta</div>
+    </ion-row>
+    <ion-row class="option_css" (click)="goToPage('HistorialPuntosPage')">
+      <ion-icon style="margin-right: 12px;color:#CFD3D6;" name="star"></ion-icon><div>Mis puntos</div>
+    </ion-row>
+    <ion-row class="option_css" (click)="goToPage('courses')">
+      <ion-icon style="margin-right: 12px;color:#CFD3D6;" name="list-box"></ion-icon><div>Cursos</div>
+    </ion-row>
+    <ion-row class="option_css" (click)="goToPage('NewsPage')">
+      <ion-icon style="margin-right: 12px;color:#CFD3D6;" name="paper"></ion-icon><div>Artículos</div>
+    </ion-row>
+    <ion-row class="option_css" (click)="goToPage('ReportIssuePage')">
+      <ion-icon style="margin-right: 12px;color:#CFD3D6;" name="help-circle"></ion-icon><div>FAQ / Soporte</div>
+    </ion-row>
+    <ion-row class="option_css" (click)="goToPage('AboutPage')">
+      <ion-icon style="margin-right: 12px;color:#CFD3D6;" name="information-circle"></ion-icon><div>Acerca de</div>
+    </ion-row>
+    <ion-row class="option_css">
+    </ion-row>
+    <ion-row class="option_css">
+    </ion-row>
+    <ion-row class="option_css">
+    </ion-row>
+    <ion-row class="option_css" (click)="goToPage('logout')">
+      <ion-icon style="margin-right: 12px;color:#CFD3D6;" name="exit"></ion-icon><div>Cerrar Sesión</div>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer style="background-color: #F8F8F8">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('DashboardPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="home"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">INICIO</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('SocialPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="people"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">CHATS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('RetoPasosPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="calendar"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">RETOS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('ranking')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="trophy"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">RANK</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('MenuPage')">
+          <ion-row col-12 class="dash_icons"style="color:#36A2EB !important;"><ion-icon name="menu"></ion-icon></ion-row>
+          <ion-row col-12 style="color:#36A2EB !important;text-align: center;font-size: 1.2rem;margin-left: 3%;">MENU</ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

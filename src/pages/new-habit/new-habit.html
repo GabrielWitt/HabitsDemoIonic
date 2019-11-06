@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>NUEVO HÁBITO</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding no-margin color="light">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid class="background">
+    <ion-row>
+      <ion-list-header text-uppercase color="light" style="margin-bottom: 0px;"> Selecciona una categoría </ion-list-header>
+      <ion-scroll col-12 scrollX="true" [ngStyle]="{'margin-top':'10px', 'margin-bottom':'10px'}">
+        <div *ngFor="let category of habitCategories index as i" class="habitCategoriesImg">
+          <img-loader [src]="category.picture" class="img-circle img-category" alt="" (click)="getSubcategories(i, category.name, category.picture)"
+            [class.img-disabled]="categoryTitle != category.name" (load)="dosomething()" useImg></img-loader>
+          <p class="categoryLabel" (click)="getSubcategories(i, category.name, category.picture)">{{category.name}}</p>
+        </div>
+      </ion-scroll>
+      <ion-col col-12 style="background-size: 100% 150%; background-position: center; position: relative; padding: 0; margin: 0; width: 100%;">
+        <img-loader [src]="categoryPicture" style="display: block; position: absolute;"></img-loader>
+        <h6 text-center [ngStyle]="{'margin-top':'15px', 'color':'#fff','position': 'relative'}">SELECCIONASTE: {{ categoryTitle }}</h6>
+        <ion-scroll col-12 scrollX="true" style="margin-top: 30px; height: 70px; z-index: 5; position: relative;" [ngClass]="{'animated':true, 'infinite': false, 'bounce': bounceAnimationSubCategory}">
+          <img src="./assets/img/dot.png" width="10px">
+          <button *ngFor="let subcategory of habitSubcategories index as i" ion-button round [outline]="subcategory.name != subcategoryName" color="light"
+            (click)="getHabits(i, subcategory.name)">{{ subcategory.name }}</button>
+        </ion-scroll>
+      </ion-col> 
+    </ion-row>
+  </ion-grid>
+
+  <ion-list no-border>
+    <ion-list-header text-uppercase color="light" style="margin-bottom: 0px;">
+      Selecciona un Hábito
+    </ion-list-header>
+    <ion-item *ngIf="habits.length == 0">
+      <ion-note>Hábitos no diponibles</ion-note>
+    </ion-item>
+    <ion-item no-lines *ngIf="habits.length > 0">
+      <ion-row col-12 class="habit-padding" [ngClass]="{'animated':true, 'infinite': false, 'flipInX': bounceAnimationHabit}">
+        <ion-col col-4 *ngFor="let habit of habits index as i">
+          <button ion-button small round block [outline]="habit.name != habitName" (click)="getGoals(i, habit.name )">{{ habit.name }}</button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-list-header text-uppercase color="light" style="margin-bottom: 0px;">
+      Selecciona un objetivo
+    </ion-list-header>
+    <ion-item *ngIf="habitGoals.length == 0">
+      <ion-note>Objetivos no disponibles</ion-note>
+    </ion-item>
+    <ion-list radio-group *ngIf="habitGoals.length > 0">
+      <ion-item *ngFor="let goal of habitGoals">
+        <ion-label *ngIf="goal.name != 'Otro:'" col-10>{{ goal.name }}</ion-label>
+        <ion-radio *ngIf="goal.name != 'Otro:'" col-2 (click)="setGoal(goal)"></ion-radio>
+        <ion-label *ngIf="goal.name == 'Otro:'" col-3>{{ goal.name }}</ion-label>
+        <ion-input *ngIf="goal.name == 'Otro:'" col-9 placeholder="Otro" clearInput [(ngModel)]="newHabitTitle" maxlength="30" (keydown)='pressKey($event,goal)'></ion-input>
+      </ion-item>
+    </ion-list>
+    <!--ion-list-header text-uppercase color="light" style="margin-bottom: 0px;">
+      Selecciona tu recordatorio
+    </ion-list-header>
+    <button ion-item (click)="showAlarmModal()">Programar alarma</button-->
+    <ion-item-divider color="light"></ion-item-divider>
+    <ion-item-divider color="light">
+      <ion-row float-right>
+        <ion-col col-12>
+          <!--button ion-button round color="danger" (click)="closePage()">CANCELAR</button-->
+         <button ion-button round (click)="saveUserGoal()">EMPEZAR</button>
+        </ion-col>
+      </ion-row>
+    </ion-item-divider>
+  </ion-list>
+</ion-content>

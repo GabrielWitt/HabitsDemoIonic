@@ -1,0 +1,17 @@
+page-health-steps {
+    .card-background{
+        background-color: #EFEDF0;
+    }
+    .card_data{    
+        width: 90%;
+        margin: 5%;
+        align-items: center;
+        background-size: 100% 100%;
+        -webkit-transform: translateZ(0) translate3d(0px,0px,0px);
+    }
+    .header_cards_health{
+        text-transform: uppercase !important;
+        color:white;
+        font-weight: bold;
+    }
+}

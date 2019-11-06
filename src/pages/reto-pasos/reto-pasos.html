@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Retos y actividades</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-list>
+    <!-- PESTAÑA DE EVALUACIONES-->
+    <ion-list-header>
+      EVALUACIONES
+    </ion-list-header>
+    <ion-scroll scrollX="true" scrollY="true" style="background-color: white; height: 130px;">  
+      <div style="display: inline-flex;">
+        <div *ngFor="let test of TestItems" style="width: 25vw; margin-right: 8px;" class="test_css"> 
+          <p class="reto-title">{{test.name}}</p>
+          <p class="reto-text" *ngIf="test.results && test.results.length > 0" (click)="irAlResult(test)">Ultimo Resultado {{ test.results[0].result }}</p>
+          <p class="reto-text" *ngIf="test.next < test.dias_prox&&!test.results" (click)="irAlTest(test)"> Faltan {{ test.dias_prox - test.next}} dias</p>
+          <p class="reto-duration" *ngIf="test.results && test.results.length > 0" (click)="irAlResult(test)">{{ test.results[0].timestamp | date: "dd - MMM"}}</p>
+        </div>
+      </div>
+    </ion-scroll>
+    <!-- <ng-container *ngFor="let test of TestItems ">
+			<ion-item *ngIf="test.type != 'article_test'">
+				<h2>{{test.name}}</h2>
+				<ng-container *ngIf="test.results && test.results.length > 0">
+					<p>Ultimo Resultado</p>
+					
+					<ion-grid>
+					  <ion-row>
+						<ion-col col-4>{{ test.results[0].timestamp | date: "dd - MMM"}}:</ion-col>
+						<ion-col col-4 offset-2 class="respuesta-q" (click)="irAlResult(test)">{{ test.results[0].result }}</ion-col>
+						<ion-col col-2></ion-col>
+					  </ion-row>
+					</ion-grid>
+					
+				</ng-container>
+				<ion-icon class="play-ico" ios="ios-play" md="md-play" item-end (click)="irAlTest(test)" [ngClass]="{'play-active': (test.next >= test.dias_prox)}" style="display:flex">
+					<span *ngIf="test.next < test.dias_prox" item-end style="font-size:12px; position:absolute; margin-right:-10px; margin-top: 30px;"> Faltan {{ test.dias_prox - test.next}} dias</span>
+				</ion-icon>
+				
+				
+			</ion-item>
+		</ng-container>-->
+		<ion-item *ngIf="TestItems.length == 0"> <p style="white-space: normal;">No hay test disponibles por el momento, vuelva m&aacute;s tarde para ver si hay nuevos </p> </ion-item>
+    <!-- PESTAÑA DE ACTIVIDADES-->
+    <ion-list-header>
+      ACTIVIDADES
+    </ion-list-header>
+    <ion-scroll scrollX="true" scrollY="true" style="background-color: white; height: 130px;">  
+      <div style="display: inline-flex;">
+        <div *ngFor="let act of activities" style="width: 25vw; margin-right: 8px;" class="activity_css" (click)="selectACtivity(act)"> 
+          <p class="reto-title">{{act.title}}</p>
+          <p class="reto-text">{{act.rules.split('-salto-')[0].substring(0, 40)}}</p>
+          <p class="reto-duration">{{act.duration}}</p>
+        </div>
+      </div>
+    </ion-scroll>
+		<ion-item class="reto-item" *ngIf="!activities || activities &&  activities.length == 0">
+			<p class="reto-text">No hay actividades disponilbes actualmente</p>
+		</ion-item>
+    <!-- PESTAÑA DE RETOS-->
+    <ion-list-header>
+      RETOS
+    </ion-list-header>
+    <ion-scroll scrollX="true" scrollY="true" style="background-color: white; height: 130px;">  
+      <div style="display: inline-flex;">
+        <div *ngFor="let reto of retos" style="width: 25vw; margin-right: 8px;" class="reto_css" (click)="selectReto(reto)"> 
+          <p class="reto-title">{{reto.name}}</p>
+          <p class="reto-text">{{reto.descripcion}}</p>
+          <p class="reto-duration">{{reto.fecha_inicio | date: "dd/MMM" }} - {{reto.fecha_fin | date: "dd/MMM"}}</p>
+        </div>
+      </div>
+    </ion-scroll>
+    <!-- 
+		<ng-container *ngFor="let reto of retos">
+		  <ion-item class="reto-item" (click)="selectReto(reto)">
+			<ion-thumbnail item-start>
+			  <img [src]="reto.picture">
+			</ion-thumbnail>
+			<h2 class="reto-title">{{reto.name}}</h2>
+			<p class="reto-text">{{reto.descripcion}}</p>
+			<p class="reto-text"> Duracion: {{reto.fecha_inicio | date: "dd/MMM" }} - {{reto.fecha_fin | date: "dd/MMM"}} </p>
+		  </ion-item>
+		</ng-container> -->
+		<ion-item class="reto-item" *ngIf="!retos || retos &&  retos.length == 0">
+			<p class="reto-text">No hay retos disponilbes actualmente</p>
+		</ion-item>
+	</ion-list>
+</ion-content>
+<ion-footer style="background-color: #F8F8F8">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('DashboardPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="home"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">INICIO</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('SocialPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="people"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">CHATS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('RetoPasosPage')">
+          <ion-row col-12 class="dash_icons" style="color:#36A2EB !important;"><ion-icon name="calendar"></ion-icon></ion-row>
+          <ion-row col-12 style="color:#36A2EB !important;text-align: center;font-size: 1.2rem;margin-left: 3%;">RETOS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('ranking')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="trophy"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">RANK</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('MenuPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="menu"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">MENU</ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

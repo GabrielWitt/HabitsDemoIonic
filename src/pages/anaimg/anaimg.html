@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+	<ion-buttons left>
+		<button ion-button (click)="back()" icon-only style="color: black;">
+		  <ion-icon name="arrow-round-back"></ion-icon>
+		</button>
+	</ion-buttons>
+    <ion-title>Foto de Ana</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<h3 style=" padding-left: 20px;   font-size: 1.5rem;">Elige tu foto favorita para Coach Ana: </h3>
+	<ion-row align-items-center class="row-principal">
+			<ion-col col-1></ion-col>
+			<ion-col col-5>
+				<a style="text-align:center; " (click)="selectImg('/assets/user_icons/iconAna.png')">
+					<div class="cat"  >	
+						<img src="/assets/user_icons/iconAna.png">	
+					</div>
+				</a>
+			</ion-col>
+			<ion-col col-5>
+				<a style="text-align:center; " (click)="selectImg('/assets/user_icons/1.jpeg')">
+					<div class="cat"  >	
+						<img src="/assets/user_icons/1.jpeg">	
+					</div>
+				</a>
+			</ion-col>
+			<ion-col col-1></ion-col>
+
+			<ion-col col-1></ion-col>
+			<ion-col col-5>
+				<a style="text-align:center; " (click)="selectImg('/assets/user_icons/2.jpeg')">
+					<div class="cat"  >	
+						<img src="/assets/user_icons/2.jpeg">	
+					</div>
+				</a>
+			</ion-col>
+			<ion-col col-5>
+				<a style="text-align:center; " (click)="selectImg('/assets/user_icons/3.jpeg')">
+					<div class="cat"  >	
+						<img src="/assets/user_icons/3.jpeg">	
+					</div>
+				</a>
+			</ion-col>
+			<ion-col col-1></ion-col>	
+			
+			
+			
+		</ion-row>
+</ion-content>

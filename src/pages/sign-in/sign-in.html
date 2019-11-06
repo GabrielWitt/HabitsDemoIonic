@@ -1,0 +1,30 @@
+<ion-content padding>
+  <ion-list>
+    <ion-label *ngIf="!resetpass" class="lblNormalWhite" style="width:100%; text-align: center">Iniciar Sesión</ion-label>
+    <ion-label *ngIf="resetpass" class="lblNormalWhite" style="width:100%; text-align: center">Olvidé mi contraseña</ion-label>
+    <ion-label class="lblNormalWhite" style="width:100%; text-align: center">            
+      <img id="IMAGEN" style="width:65%; background-color:transparent;" src="./assets/img/LogoHabitsText.png">
+    </ion-label>
+      <h3 *ngIf="resetpass" col-12 style="text-align: center; color: white;">Por favor, ingrese el email con el que se registró.</h3>
+    <ion-item class="inputText">
+      <ion-input clearInput  placeholder="Email" (keydown)='enterMail($event)'
+        [(ngModel)]="mail" name="email" type="text" required>
+      </ion-input>
+    </ion-item>
+    <ion-item class="inputText" *ngIf="!resetpass">
+      <ion-input placeholder="Contraseña" (keydown)='enterPass($event)' #passInput
+      [(ngModel)]="password" name="password" type="password" clearInput required>
+      </ion-input>
+    </ion-item>
+    <button *ngIf="!resetpass" ion-button round block class="btnBlueRounded" (click)="login()">INICIAR SESIÓN</button>
+    <button *ngIf="resetpass" ion-button round block class="btnBlueRounded" (click)="resetPass()">CAMBIAR CONTRASEÑA</button>
+    <button ion-button round block class="btnTransparentRounded" (click)="return()">CANCELAR</button>
+    <ion-row *ngIf="!resetpass" class="colBottomBorder" style="margin-bottom:11px;">
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <h3 *ngIf="!resetpass" (click)="reset()" class="lblSmallWhite" style="width:100%; text-align: center">¿Olvidaste tu contraseña? Presiona <a style="color:#36b8ea">AQUÍ</a></h3>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</ion-content>

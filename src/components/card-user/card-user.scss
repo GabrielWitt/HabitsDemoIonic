@@ -1,0 +1,79 @@
+card-user {
+    width: 100%;
+  
+    .edit-style{
+      text-decoration: underline;
+      color: #9e9e9e;
+    }
+    
+    ion-col{
+         img-loader{
+            border-radius: 50%;
+            max-width: 130px;
+            max-height: 130px;
+            background-position: center;
+            float: right;
+        }
+        img{
+            float: right;
+            max-width: 130px;
+            max-height: 130px;
+            border-radius: 50%;
+        }
+    }
+
+    .profile_left{
+        width: 96% !important;
+        margin-top: 11px;
+    }
+
+    .pie_style{
+        height: 80% !important;
+        //margin-top: 8px;
+        //width: 50vw !important;
+        //padding: 0 !important;
+       // margin: 5px !important;
+        //background-color: white;
+    }
+
+    .pie_col{
+        padding: 0 !important;
+        margin: 0 !important;
+        //margin-top: 12px !important;
+    }
+
+    .pie_row{        
+        background-position: center;
+        background-repeat: no-repeat;
+        background: url('../assets/imgs/circle_steps.jpg');
+        background-size: 52% 100%;
+    }
+
+    .donut-inner {
+        margin-top: -31%;
+        margin-bottom: 31%;
+        margin-left: 3%;
+        font-size: 2rem;
+        text-align: center;
+        font-weight: bold;
+     }
+
+     .donut-inner h5 {
+        margin-bottom: 5px;
+        margin-top: 0;
+     }
+
+     .donut-inner span {
+        font-size: 12px;
+     }
+
+     .check_steps{
+         color: #36A2EB;
+         font-size: 2rem;
+     }
+
+     .uncheck_steps{
+        color: grey;
+        font-size: 2rem;
+    }
+}

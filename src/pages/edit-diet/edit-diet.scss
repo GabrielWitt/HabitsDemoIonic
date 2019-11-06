@@ -1,0 +1,89 @@
+page-edit-diet {
+
+    .food-icons{
+        height:30px;
+        width:20% !important;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+    }
+    .collapsible {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+    }
+
+    .active, .collapsible:hover {
+        background-color: #ccc;
+    }
+
+    .ColContent {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+    }
+
+    .selectwidthauto {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .alert-ios .alert-radio-label{ white-space: pre-line !important;}
+    .alert-md .alert-radio-label{ white-space: pre-line !important;}
+    .alert-wp .alert-radio-label{ white-space: pre-line !important;}
+
+    .breakfast{
+        background-color: #10C0F9;
+    }
+    .snack1{
+        background-color: #5593DC;
+    }
+    .lunch{
+        background-color: #777FD0;
+    }
+    .snack2{
+        background-color: #9869C5;
+    }
+    .dinner{
+        background-color: #BA56B9;
+    }
+    //Active
+    .active, .breakfast:hover {
+        background-color: #06AEE6;
+    }
+    .active, .snack1:hover {
+        background-color: #3F84D8;
+    }
+    .active, .lunch:hover {
+        background-color: #646FCA;
+    }
+    .active, .snack2:hover {
+        background-color: #7642AA;
+    }
+    .active, .dinner:hover {
+        background-color: #AC46AC;
+    }
+
+    .breakfast_col{
+        background-color: #06AEE6;
+    }
+    .snack1_col{
+        background-color: #3F84D8;
+    }
+    .lunch_col{
+        background-color: #646FCA;
+    }
+    .snack2_col{
+        background-color: #7642AA;
+    }
+    .dinner_col{
+        background-color: #AC46AC;
+    }
+}

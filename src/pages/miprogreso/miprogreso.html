@@ -1,0 +1,61 @@
+<!--
+  Generated template for the MiprogresoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mi Progreso</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-segment [(ngModel)]="tipo" color="secondary">
+		<ion-segment-button value="peso">
+		  Peso
+		</ion-segment-button>
+		<ion-segment-button value="grasa">
+		 % de Grasa
+		</ion-segment-button>
+		<ion-segment-button value="musculo">
+		 % de Musculo 
+		</ion-segment-button>
+		<ion-segment-button value="imc">
+		 IMC
+		</ion-segment-button>
+    </ion-segment>
+  
+  
+  <div style="height: 420px;">
+	  <div [hidden]=" tipo !='peso' && tipo" style="height: 420px;">
+			 <div col-12 style="display: block; height: 420px;">
+				<canvas height="420px" style="background-color: #FFF !important; border-radius: 4%;  width: 100%;" #barCanvasPeso></canvas>
+			</div>
+	  </div>
+	  <div [hidden]=" tipo !='grasa'">
+			<div col-12 style="display: block">
+				<canvas height="420px" style="background-color: #FFF !important; border-radius: 4%; width: 100%;" #barCanvasGrasa></canvas>
+			</div>
+	  </div>
+	  <div [hidden]=" tipo !='musculo'">
+			<div col-12 style="display: block">
+				<canvas height="420px" style="background-color: #FFF !important; border-radius: 4%; width: 100%;" #barCanvasMuscle></canvas>
+			</div>
+	  </div>
+	  
+	  <div [hidden]=" tipo !='imc'">
+			<div  style="display: block">
+				<h1 [ngStyle]="A" style=" color:rgba(255, 224, 149, 1);   font-size: 1.3rem;    position: absolute;  width: 100%;text-align: center; display:none">BAJO PESO</h1>
+				<h1 [ngStyle]="B" style=" color:rgba(180, 235, 154, 1);     font-size: 1.3rem;   position: absolute;top:  calc(236.896px + 20px);;   width: 100%;text-align: center;  display:none">NORMAL</h1>
+				<h1 [ngStyle]="C" style=" color: rgba(244, 181, 130, 1);     font-size: 1.3rem;  position: absolute;top: calc(174px*0.97);   width: 100%;text-align: center;  display:none">SOBREPESO</h1>
+				<h1 [ngStyle]="D"style="    color:rgba(255, 155, 183, 1);    font-size: 1.3rem; position: absolute;top: calc(67px*1.3);   width: 100%;text-align: center;  display:none">OBESO</h1>
+				<canvas height="420px" style="background-color: #FFF !important; border-radius: 4%; width: 100%;" #barCanvasImc></canvas>
+			</div>
+	  </div>
+  </div>
+
+</ion-content>

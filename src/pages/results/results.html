@@ -1,0 +1,14 @@
+<ion-content padding>
+  <ion-grid>
+    <ion-row style="margin-bottom: 20px;">
+      <ion-title style="color: white !important; text-align: center"><p style="color: white !important; text-align: center">{{label.title}}</p></ion-title>
+    </ion-row>
+    <ion-row style="height:70%; text-align: center">
+        <h1 *ngIf="resultado" style="margin-left: auto; margin-right: auto; display: block; color: white;">{{resultado}}/100</h1>
+        <h3 style="text-align: justify; color: white;">{{ResultText}}</h3>
+    </ion-row>
+  </ion-grid>
+  <ion-grid style="width: 70%;">
+    <button style="border: 2px solid white; color: white; text-transform: uppercase; " (click)="EndQuiz()" ion-button round outline>{{label.done}}</button>
+  </ion-grid>
+</ion-content>

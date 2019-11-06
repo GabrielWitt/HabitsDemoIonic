@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title style="padding-left: 20%;">{{label.title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToPage('ReportIssuePage')" style="color: #488aff">
+        <ion-icon name="help-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      [pullingText]="label.refresh"
+      refreshingSpinner="circles"
+      [refreshingText]="label.loading">
+    </ion-refresher-content>
+  </ion-refresher>
+  <!--<button block ion-button (click)="startFunctios()">Functions</button>
+  <label col-3>Comparte:</label>
+  
+  
+  <button ion-button (click)="shareSocial('I')"><ion-icon name="logo-instagram"></ion-icon></button>
+  <button block ion-button (click)="startFunctios()">Analitycs</button>
+  div *ngIf="users">
+      <progress-bar [progress]="mainProvider.getGS1Percent()" col-12 no-padding></progress-bar>
+      <Label>USUARIOS: {{users}}</Label>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+      </ion-col>
+      <ion-col col-4>
+        <button block ion-button (click)="mainProvider.checkHealth()">Ver</button>
+      </ion-col>
+      <ion-col col-4>
+        <button block ion-button (click)="mainProvider.reloadHealth()">Subir</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <button ion-button full *ngIf="mode=='test'&&loggedUser" (click)="probar()">Guardar error en catalogo</button-->
+  <card-user [network-status]="isOnline" [user]=" user"></card-user>
+  <div class="{{geClassAna()}} ">
+    <div>
+		<ion-badge item-end *ngIf="chatProvider&&chatProvider.notAna == 1" color="danger" class="bagde-ana">1</ion-badge>
+		<button *ngIf="coachReady()" ion-button block round (click)="toChatBotRoom()"> 
+		  <div style="width: 30px; margin-right: 16px;">
+		  
+		  <img [src]="chatProvider && chatProvider._chatRoomsBotsData && chatProvider._chatRoomsBotsData[user.chat_bot_room['BOT-001']]?chatProvider._chatRoomsBotsData[user.chat_bot_room['BOT-001']].imagen:'./assets/user_icons/iconAna.png'" style="height: 30px; border-radius: 50%; margin-right:10px"></div>
+      <div>{{label.coach}}</div>      	
+		</button>
+		<button *ngIf="!coachReady()" ion-button block round> 
+      {{label.connecting}} {{realtime.getPercent()}}%     	
+		</button>
+    <button *ngIf="this.mode=='test'" ion-button block round (click)="toHabitsBot()"> 
+      HABITS BOT     
+    </button>
+	</div>
+  </div>
+  <card-habit *ngFor="let userGoal of user_goals" [user_goal]="userGoal"></card-habit>
+  <diet-cards *ngIf="user" [user]="user" ></diet-cards>
+  <!--card-reminders [user]="user | async"></card-reminders>-->
+  <card-news [user_goal]="user_goals[0]" [ready]="coachReady()"></card-news>
+  <ion-fab bottom right *ngIf="coachReady()">    
+    <button ion-fab  class="fab-p" color="primary"><!--ion-badge style="border-radius: 50%;" class="animated" [class.pulse]="badge" *ngIf="sumNotReads()" color="danger" item-end class="animated zoomIn">{{badge}}</ion-badge--><ion-icon name="arrow-dropup-circle"></ion-icon></button>
+    <ion-fab-list side="top">
+      <div *ngFor="let room of realtime.lastRoomsUpdate | reverse; index as i" class="fab-Buton"> 
+        <div *ngIf="setbadge(i,room.NotRead)">     
+          <button ion-fab (click)="openSocial(room)">
+            <img-loader [src]="room.picture" class="img-l-f" [fallbackUrl]="'./assets/imgs/group.png'" [fallbackAsPlaceholder]="true"></img-loader>
+          </button>
+          <div class="room_name" (click)="openSocial(room)">{{getName(room.name)}}</div>
+          <ion-badge *ngIf="room.NotRead" color="danger" class="animated zoomIn bagde-p" [ngClass]="{'l-2':room.NotRead>9&&room.NotRead<100,'l-3':room.NotRead>99}">{{room.NotRead>=10?'+'+room.NotRead:+room.NotRead}}</ion-badge>
+        </div>
+      </div>  
+      <div class="fab-Buton">        
+        <button ion-fab color="primary" (click)="goToPage('SocialPage')">
+          <ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon>
+        </button>
+        <div class="room_name" (click)="goToPage('SocialPage')">{{label.groups}}	</div>
+      </div>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-fab bottom right *ngIf="!coachReady()">    
+    <button ion-fab  class="fab-p" color="primary">
+      <ion-spinner style="width: 1.6rem; height: 1.6rem;" name="circles"></ion-spinner>
+    </button>
+  </ion-fab>
+<!-- <button ion-button (click)="goToPage('NewHabitPage')">Nuevo Hábito</button> -->
+</ion-content>
+<ion-footer style="background-color: #F8F8F8">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('DashboardPage')">
+          <ion-row col-12 class="dash_icons" style="color:#36A2EB !important;"><ion-icon name="home"></ion-icon></ion-row>
+          <ion-row col-12 style="color:#36A2EB !important;text-align: center;font-size: 1.2rem;margin-left: 3%;">INICIO</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('SocialPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="people"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">CHATS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('RetoPasosPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="calendar"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">RETOS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('NewsPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="trophy"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">RANK</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('MenuPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="menu"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">MENU</ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

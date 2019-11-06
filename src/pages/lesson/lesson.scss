@@ -1,0 +1,43 @@
+page-lesson {
+
+    .centerA{
+        text-align: center;
+    }
+
+    .RoundTopic{
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+    
+    .topicIMG {
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        background-color: white;
+    }
+
+    .classOn{
+        background-color: #3DC2ED;
+    }
+
+    .classDone{
+        background-color: white;
+    }
+
+    .overIMG {
+        position: absolute;
+        top: 17%;
+        text-align: center;
+        font-size: 5rem;
+    }
+    .overIMGlock{
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.8;
+    }
+}

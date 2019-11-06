@@ -1,0 +1,35 @@
+page-elearning {
+
+    .onSelectedOption{
+        width: 48%; 
+        color: #488aff; 
+        border-bottom: 1px solid #488aff;
+        font-size: 2rem;
+        padding-top: 3%;
+        margin-bottom: 2%;
+    }
+    .notSelectedOption{
+        width: 48%; 
+        color: grey; 
+        font-size: 2rem;
+        padding-top: 3%;
+        margin-bottom: 2%;
+    }
+    img-loader {
+        width: 80px !important;
+        height: 80px !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+	
+	.no-more{
+		display: block;
+	}
+	
+	.item-l+ .no-more{
+		display: none;
+	}
+	
+	
+}
+

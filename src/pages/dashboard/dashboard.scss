@@ -1,0 +1,213 @@
+page-dashboard {
+    .badge{
+        padding:6px;
+    }
+
+    img-loader{
+        height: 150px!important;
+        border: solid 1px #c8c7cc;
+    }
+
+    .img-l-f{
+            height: 100%!important;
+    }
+
+	.bagde-ana{
+		position: relative !important;
+		top: 15px !important;
+		background: red !important;
+		padding: 5px !important;
+		float: right !important;
+		margin-right: -5px !important;
+		padding: 7px 10px !important;
+        border-radius: 50%;
+        z-index: 1;
+	}
+    .room_name{
+        text-align: center!important;
+        font-size: 1.2rem!important;
+        color:white!important;
+        line-height: 1!important;
+        padding-top: 2px!important;
+        font-weight: 600!important;
+    }
+    .bagde-p{
+        position: relative!important;
+        top: -36px!important;
+        left: 33px!important;
+        padding: 3px 5px!important;
+        font-size: smaller!important;
+    }
+    .l-2{
+        left: 27px!important;
+    }
+    .l-3{
+        left: 22px!important;
+    }
+    .fab-Buton{
+        max-width: 50px!important;
+        width: 50px!important;
+        margin-top: 6px!important;
+
+        button{
+            margin: 0px auto 0px auto!important;
+            padding:0px!important;
+        }
+    }
+    .fab-p{
+        z-index: 1000;
+    }
+
+    .fab-list-active{
+        background: rgba(0, 0, 0, 0.68)!important;
+        border-radius: 30px 30px 30px 30px;
+        padding-bottom: 61px;
+        margin-bottom: 0px;
+    }
+
+    .tutorial1{
+        position:fixed;
+        width:100%;
+        height:100vh;
+        top:0px;
+        padding: 15%;
+        padding-top:45%;
+        right:0px;
+        color: #fff; 
+        background-color: rgba(0, 0, 0,0.8);
+        border-radius:0px;
+        text-align:center;
+        box-shadow: 2px 2px 2px #000;
+        overflow: scroll;
+    } 
+    
+    .tutorial2{
+        position:fixed;
+        width:600px;
+        height:600px;
+        bottom:-250px;
+        padding: 15%;
+        right:-250px;
+        color: #fff; 
+        background-color: rgba(0, 0, 0,0.8);
+        border-radius:100%;
+        text-align:center;
+        box-shadow: 2px 2px 2px #000;
+        overflow: scroll;
+    }
+    
+    .tutorial3{
+        position:fixed;
+        width:100%;
+        height:100vh;
+        bottom:0px;
+        padding: 15%;
+        right:0px;
+        color: #fff; 
+        background-color: rgba(0, 0, 0,0.8);
+        border-radius:0px;
+        text-align:center;
+        box-shadow: 2px 2px 2px #000;
+        overflow: scroll;
+    } 
+    
+    .tutorial4{
+        position:fixed;
+        width:100%;
+        height:100vh;
+        top:0px;
+        padding: 15%;
+        right:0px;
+        color: #fff; 
+        background-color: rgba(0, 0, 0,0.8);
+        border-radius:0px;
+        text-align:center;
+        box-shadow: 2px 2px 2px #000;
+        overflow: scroll;
+    }  
+    
+    .tutorial5{
+        position:fixed;
+        width:100%;
+        height:100vh;
+        bottom:0px;
+        padding: 15%;
+        right:0px;
+        color: #fff; 
+        background-color: rgba(0, 0, 0,0.8);
+        border-radius:0px;
+        text-align:center;
+        box-shadow: 2px 2px 2px #000;
+        overflow: scroll;
+    } 
+    
+    .tutorial6{
+        position:fixed;
+        width:170%;
+        height:600px;
+        top:-200px;
+        padding: 15%;
+        left:-250px;
+        color: #fff; 
+        background-color: rgba(0, 0, 0,0.8);
+        border-radius:100%;
+        text-align:center;
+        box-shadow: 2px 2px 2px #000;
+        overflow: scroll;
+    }
+    
+    .tutorial7{
+        position:fixed;
+        width:100%;
+        height:100vh;
+        top:0px;
+        padding: 15%;
+        right:0px;
+        color: #fff; 
+        background-color: rgba(0, 0, 0,0.8);
+        border-radius:0px;
+        text-align:center;
+        box-shadow: 2px 2px 2px #000;
+        overflow: scroll;
+    } 
+
+    .card{
+        background-color: #EFEDF0;
+    }
+    .reminder-icons{
+        display: inline-block;
+        border: 1px solid #4B8DFE;
+        color: #4B8DFE;
+        background-color: white !important;
+    }
+    .reminder-text{
+        font-size: 1.4rem;  
+        color: #4B8DFE;
+    }
+
+    .AnaCSSoff{
+        width:100%; 
+        padding: 15px 25px 2px 25px
+    }
+
+    .AnaCSSon{
+        width:100%; 
+        padding: 0 25px 2px 25px
+    }
+    
+    .dash_icons{
+        text-align: center;
+        font-size: 1.8rem;
+        margin: 0 0 0 28% !important;
+        padding: 0 !important;
+        color:#CFD3D6;
+    }
+    
+    .dash_icons_active{
+        text-align: center;
+        font-size: 1.5rem;
+        margin: 0 0 0 28% !important;
+        padding: 0 !important;
+        color:#36A2EB !important;
+    }
+}

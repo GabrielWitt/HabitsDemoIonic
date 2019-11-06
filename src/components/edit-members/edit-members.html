@@ -1,0 +1,48 @@
+<ion-scroll scrollX="true" scrollY="true" style="background-color: #eeeeee; height: 130px;">  
+  <div style="display: inline-flex;">
+    <div *ngFor="let member of newMembers index as j" style="width: 90px; margin-left: 4px;"> 
+        <img *ngIf="!member.picture" src="./assets/user_icons/icon0.png" style="width: 90px; height: 90px; border-radius: 50%;" />
+        <img-loader *ngIf="member.picture"  [spinner]="true"[src]="member.picture" style="width: 90px; height: 90px; border-radius: 50%;" useImg></img-loader>
+        <div *ngIf="j != 0" style="margin-top: -20px; margin-left: 70px; position: absolute; z-index: 999; background-color: #A9A9A9; border-radius: 50%; width: 20px; height: 20px; padding-top: 2px; padding-left: 6px;" (click)="removeMember(j)">X</div>
+      <div style="text-align: center;">{{member.name}}</div>
+    </div>
+  </div>
+</ion-scroll>
+<ion-list col-12>
+   <ion-row col-12 style="background-color: #eeeeee">  
+      <ion-col col-12>
+		   <ion-item style="background-color: #fff;padding-right: 5%; ">
+				<ion-label > <ion-icon name="search"></ion-icon></ion-label>
+				<ion-input type="text" [(ngModel)]="searchText" placeholder="Buscar por nombre"></ion-input>
+			</ion-item>
+	   </ion-col>
+	</ion-row>
+  <ion-item *ngFor="let user of (members | search : searchText : 'name') index as i" style="background-color: #eeeeee;">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <img *ngIf="!user.picture" src="./assets/user_icons/icon0.png" style="width: 90px; height: 90px; border-radius: 50%;" />    
+          <img-loader *ngIf="user.picture" [spinner]="true" [src]="user.picture" style="width: 100%; height: 100%; border-radius: 50%;" useImg></img-loader>
+        </ion-col>
+        <ion-col col-6>
+          <h2>{{user.name}}</h2>
+          <p>Puntos: {{user.points}}</p>
+          <p>Hábitos:</p>
+          <button ion-button style="height: 20px;font-size: 1rem;" color="#36B8EA" *ngFor="let goal of user.user_goal">{{goal}}</button>
+          <p *ngIf="(user.user_goal==null || user.user_goal.length==0)">No disponibles.</p>
+        </ion-col>
+        <ion-col col-3>
+          <button ion-button color="#b8ea36" outline item-end style="height: 20px; width: 70px; margin-top: 45px;" (click)="addMember(i)">Agregar</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item-divider color="light">
+    <ion-row float-right>
+      <ion-col col-12>
+        <button ion-button round color="danger" (click)="dismiss()">CANCELAR</button>
+        <button ion-button round (click)="saveMembers()">GUARDAR</button>
+      </ion-col>
+    </ion-row>
+  </ion-item-divider>
+</ion-list>

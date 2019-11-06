@@ -1,0 +1,29 @@
+<ion-card color="card-background" no-padding no-margin [ngStyle]="{'width': '100%', 'margin-top': '15px'}" [ngClass]="{'animated':true, 'infinite': false, 'zoomOutRight': deleteAnimation, 'pulse':true}">
+  <ion-grid>  
+    <ion-row col-12 align-items-center [ngStyle]="{'padding-top': '10px', 'min-height': '47px'}">
+      <span col-12 no-padding class="big-font make-bold" [ngStyle]="{'margin-bottom': '10px', 'text-transform': 'uppercase'}" text-center>{{label.habit}}</span>
+    </ion-row>
+
+    <ion-row col-12 align-items-center [ngStyle]="{'padding-top': '10px', 'min-height': '110px'}">
+      <span col-12 no-padding class="big-font make-bold" [ngStyle]="{'margin-bottom': '10px', 'text-transform': 'uppercase'}" >{{ userGoal.name }}</span>
+      <span col-9 no-padding class="medium-font" (click)="openDetail()">{{label.advance}}</span>
+      <ion-col col-3 text-right class="edit-style small-font" (click)="openDetail()">{{label.details}}</ion-col>
+      <ion-col col-12 no-padding>
+        <ion-row align-items-center no-padding>
+          <ion-col col-12 align-self-center no-padding [ngStyle]="{'padding': '10px', 'padding-left': '0px'}" (click)="openDetail()">
+            <progress-bar [progress]="checkPercent(userGoal.completed_percent)" no-padding align-self-center></progress-bar>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row (click)="openAlarm()" style="min-height:46px">
+      <ion-col col-12 text-center>
+        <ion-chip ion-button round color="primary" style="min-width: 115; display: block;"  >
+            <ion-icon name="notifications"></ion-icon> {{label.reminder}}
+        </ion-chip>
+      </ion-col>      
+    </ion-row>  
+  </ion-grid>
+</ion-card>
+<ion-row>

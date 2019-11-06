@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Bienvenido</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="tutorial-page">
+
+  <ion-slides>
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <img src="assets/LogoHabitspng.png" class="slide-image" />
+      <h2 class="slide-title">Bienvenido a Habits!</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum fuga reprehenderit necessitatibus
+        possimus nam obcaecati esse eveniet quos? Pariatur, rerum eius architecto deleniti quo distinctio laborum
+        provident tenetur placeat.</p>
+      <button ion-button large clear icon-end color="primary" (click)="moveToNext()">
+        Empezar
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <img src="assets/LogoHabitspng.png" class="slide-image" />
+      <h2 class="slide-title">Datos de salud</h2>
+      <p>A Habits le gustaría acceder a tus datos de salud para analizar y visualizar tus actividades. Es necesario
+        aprobar todos los permisos para brindarte un funcionamiento apropiado</p>
+      <button ion-button large clear icon-end color="primary" (click)="moveToNext()">
+        Autorizar
+      </button>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <img src="assets/LogoHabitspng.png" class="slide-image" />
+      <h2 class="slide-title">Notificaciones</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum fuga reprehenderit necessitatibus
+        possimus nam obcaecati esse eveniet quos? Pariatur, rerum eius architecto deleniti quo distinctio laborum
+        provident tenetur placeat.</p>
+      <button ion-button large clear icon-end color="primary" (click)="moveToNext()">
+        Autorizar
+      </button>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
+      <h2 class="slide-title">Estamos listos!</h2>
+      <button ion-button large clear icon-end color="primary" (click)="moveToNext()">
+        Ir al Dashboard
+      </button>
+    </ion-slide>
+  </ion-slides>
+  
+</ion-content>

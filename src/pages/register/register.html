@@ -1,0 +1,106 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-title>REGISTRO</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div>
+  <ion-slides #slides style="max-height:90%; min-height:90%">
+  <ion-slide>
+    <ion-list>
+      <ion-label class="lblNormalWhite">Ingresa tu código de empresa</ion-label>
+      <ion-row>
+      <ion-item class="inputText" col-5>
+        <ion-input #companycode1 maxlength="3" type="password" clearInput (keydown)='enterCompany($event)' [(ngModel)]="companyCode1" name="companyCode1" autocomplete="false"></ion-input>
+      </ion-item>
+      <ion-label class="lblNormalWhite">-</ion-label>
+      <ion-item class="inputText" col-5>
+        <ion-input #companycode2 maxlength="3" type="password" clearInput (keydown)='enterCompany($event)' [(ngModel)]="companyCode2" name="companyCode2" autocomplete="false"></ion-input>
+      </ion-item>
+      </ion-row>
+      <button type="submit" float-right ion-button round color="primary" class="btnBlueRounded" (click)="loadCompanyByKey()">SIGUIENTE</button>
+    </ion-list>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-list>
+      <ion-label class="lblNormalWhite">Información de trabajo</ion-label>
+      <ion-item class="inputText" disabled>
+        <ion-label>Empresa: {{ selectedCompany.name }}</ion-label>
+      </ion-item>
+      <ion-item class="inputText">
+        <ion-select class="selectwidthauto inputSelect" placeholder="Departamento" [(ngModel)]="selectedDepartment" [disabled]="selectedCompany.name == '' " cancelText="Cancelar">
+          <ion-option *ngFor="let department of departments" [value]="department">{{ department.name }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="inputText">
+        <ion-select class="selectwidthauto inputSelect" placeholder="Cargo" [(ngModel)]="selectedPosition" [disabled]="selectedCompany.name == '' " cancelText="Cancelar">
+          <ion-option *ngFor="let position of positions" [value]="position">{{ position.name }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-col col-5><button type="submit" float-left ion-button round color="primary" class="btnBlueRounded" (click)="selectedDepartment=null;selectedPosition=null;prev()" [disabled]="slides.isBeginning()">ANTERIOR</button></ion-col>
+      <ion-col col-5><button type="submit" float-right ion-button round color="primary" class="btnBlueRounded" (click)="validateJobInformation()">SIGUIENTE</button></ion-col>
+    </ion-list>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-list>
+      <ion-label class="lblNormalWhite">Información personal</ion-label>
+      <ion-item class="inputText">
+        <ion-input type="email" clearInput placeholder="Usuario / Email" [(ngModel)]="user.mail" name="email" [disabled]="selectedCompany.name == '' "
+          required></ion-input>
+      </ion-item>
+      <ion-item class="inputText" *ngIf="user.status != 'created'">
+        <ion-input type="password" clearInput placeholder="Crea una contraseña" [(ngModel)]="password" name="password" [disabled]="selectedCompany.name == '' "
+          required></ion-input>
+      </ion-item>
+      <ion-item class="inputText" *ngIf="user.status != 'created'">
+        <ion-input type="password" clearInput placeholder="Repita Contraseña" [(ngModel)]="passRepeat" name="passrepeat" [disabled]="selectedCompany.name == '' "
+          required></ion-input>
+      </ion-item>
+      <ion-col col-5><button type="submit" float-left ion-button round color="primary" class="btnBlueRounded" (click)="prev()" [disabled]="slides.isBeginning()">ANTERIOR</button></ion-col>
+      <ion-col col-5><button type="submit" float-right ion-button round color="primary" class="btnBlueRounded" (click)="validatePersonalInformation()">SIGUIENTE</button></ion-col>
+    </ion-list>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-list>
+      <ion-label class="lblNormalWhite">Información personal</ion-label>
+      <ion-item class="inputText">
+        <ion-input clearInput [(ngModel)]="user.name" placeholder="Nombre" [disabled]="selectedCompany.name == '' "></ion-input>
+      </ion-item>
+      <ion-item class="inputText">
+        <ion-input clearInput [(ngModel)]="user.last_name" placeholder="Apellido" [disabled]="selectedCompany.name == '' "></ion-input>
+      </ion-item>
+      <ion-item class="inputText">
+        <ion-input placeholder="Celular" clearInput [(ngModel)]="user.cell_phone" [disabled]="selectedCompany.name == '' " minlength="8"></ion-input>
+      </ion-item>
+      <ion-item style="margin-bottom: 10px; border-radius: 15px; color: white !important;" (click)="hideKeyboard();">
+        <ion-datetime (click)="hideKeyboard();" style="color:white !important;"  placeholder="Fecha de Nacimiento:" displayFormat="DD/MM/YYYY" [(ngModel)]="user.born_date" [disabled]="selectedCompany.name == '' "></ion-datetime>
+      </ion-item>
+      <ion-item class="inputText" (click)="hideKeyboard();">
+        <ion-select class="selectwidthauto inputSelect" placeholder="Género" [(ngModel)]="user.gender" [disabled]="selectedCompany.name == '' " cancelText="Cancelar" (click)="hideKeyboard();">
+          <ion-option value='Masculino'>Masculino</ion-option>
+          <ion-option value='Femenino'>Femenino</ion-option>
+          <ion-option value='Otro'>Otro</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="inputText" (click)="hideKeyboard();">
+        <ion-label>Privacidad / Terminos y Condiciones</ion-label>
+        <ion-checkbox (click)="hideKeyboard();" [(ngModel)]="privacyTerms"  (ionChange)="presentActionSheet()" [disabled]="selectedCompany.name == '' "></ion-checkbox>
+      </ion-item>
+	  <ion-grid>
+		<ion-row>
+			<ion-col col-5>
+				<button type="submit" float-left ion-button round block color="primary" class="btnBlueRounded" (click)="prev()" [disabled]="slides.isBeginning()">ANTERIOR</button>
+			</ion-col>
+			<ion-col col-5>
+				<button type="submit" float-right ion-button round  block color="primary" class="btnBlueRounded" (click)="register()">REGISTRARSE</button>
+			</ion-col>
+		</ion-row>
+	 </ion-grid>
+   </ion-list>
+  </ion-slide>
+  </ion-slides>
+  </div>
+</ion-content>

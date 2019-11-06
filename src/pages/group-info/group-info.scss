@@ -1,0 +1,44 @@
+page-group-info {
+	ion-spinner{
+		position: absolute!important;
+    	right: 45px!important;
+    	margin-top: -40px!important;
+	}
+	.sil{
+		background: transparent!important;
+	}
+	ion-card{
+		background: transparent!important;
+	    border: none!important;
+	    box-shadow: none!important;
+
+	    div button{
+	    	padding: 0px 20px;
+    		float: right;
+    		
+	    	ion-icon{
+	    	    padding-right: 7px;
+	    	}
+	    }
+	}
+	.img-circle{
+		height: 70%;
+		width: 45%;
+
+		img{
+			border-radius: 50%;
+    		-webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3)!important;
+    		box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3)!important;
+			width: 160px;
+			margin:auto;
+			margin-top: 40px;
+		}
+	}
+	.img-user{
+		img{
+			width: 47px;
+		    height: 47px;
+		    border: solid 1px #999;
+		}
+	}
+}

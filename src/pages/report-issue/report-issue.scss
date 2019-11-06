@@ -1,0 +1,36 @@
+page-report-issue {
+    .faq_button{        
+        border-radius: 3%;
+        text-transform: uppercase;
+        font-size: 2.5rem;
+        background-color: #488aff;
+        color: white;
+        margin-bottom:11px;
+    }
+
+    .question_faq_tittle{        
+        font-size: 2.5rem !important;
+        white-space: normal !important;
+        text-transform: normal;
+        background-color: #488aff;
+        color: white;
+    }
+
+    .question_faq_text{      
+        margin-top:11px;  
+        font-size: 2.5rem !important;
+        white-space: normal !important;
+        text-transform: normal;
+    }
+
+    .faq_margin{
+        text-align: center;
+        top: 57px;
+    }
+
+    .faq_bottom{
+        //height: 5rem; 
+        background-color: #fff;
+        //margin-bottom: 7%;
+    }
+}

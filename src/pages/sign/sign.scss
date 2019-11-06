@@ -1,0 +1,22 @@
+page-sign {
+    ion-content {
+        background: url(../assets/FondoLogin.jpg);
+        background-size: 100% 100%;
+        height: 100vh;
+    }
+        
+    .splash-bg {
+        position: relative;
+        background: url('../assets/FondoLogin.jpg') no-repeat transparent;
+        background-size: cover;
+        height: 100%;
+        z-index: 1;
+        background-repeat: repeat-x;
+        animation: animatedBackground 40s linear infinite;
+    }
+
+    @keyframes animatedBackground {
+        from { background-position: 0 0; }
+        to { background-position: 100% 0; }
+    }
+}

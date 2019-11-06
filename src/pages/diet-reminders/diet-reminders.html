@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Recordatorios de Dieta</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+      <ion-list-header color="light">
+          Estado Notificaciones:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>{{getActive()}} </ion-label>
+        <ion-toggle [(ngModel)]="active" (ionChange)="changeAlarmStatus()"></ion-toggle>
+      </ion-item>
+      <ion-list-header color="light">
+        Hora de Notificaciones:
+      </ion-list-header>
+      <ion-item *ngFor="let food of foods">
+        <ion-label>
+          {{food.name}}
+        </ion-label>        
+        <ion-datetime (click)="dissmissKeyboard()" placeholder="No seleccionado"  displayFormat="HH:mm"
+        pickerFormat="HH:mm" [(ngModel)]="food.hour" doneText="Aceptar"
+        cancelText="Cancelar"></ion-datetime>
+      </ion-item>
+      <ion-list-header color="light">
+        Días:
+      </ion-list-header>
+      <ion-item *ngFor="let dayData of daysArray">
+        <ion-toggle (ionChange)="dissmissKeyboard()" [(ngModel)]="dayData.selected"></ion-toggle>
+        <ion-label>
+          {{ dayData.name }}
+        </ion-label>
+      </ion-item>
+      <ion-item-divider color="light">
+        <ion-row float-right>
+          <ion-col col-12>
+            <button ion-button round color="danger" (click)="close()">CANCELAR</button>
+            <button ion-button round (click)="setAlerts()">GUARDAR</button>
+          </ion-col>
+        </ion-row>
+      </ion-item-divider>
+  </ion-list>
+
+  <!-- <button ion-button (click)="testLN()">Prueba Notificación Comida</button>
+  <button ion-button (click)="getIDS()">IDs Agendados</button> -->
+</ion-content>

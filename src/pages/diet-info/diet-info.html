@@ -1,0 +1,100 @@
+
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back()"style="color: black;">
+        <ion-icon name="arrow-back" style="padding-left: 8px;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title style="text-transform:uppercase">{{title}}</ion-title>
+    <ion-buttons end>
+    </ion-buttons>
+  </ion-navbar> 
+</ion-header>
+<ion-content no-padding>
+<div *ngIf="selectedType.type!='portions'">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-row align-items-center><h1 class="FoodLabel">{{selectedType.title}} </h1></ion-row>
+        <ion-row align-items-center><div class="FoodLabel"><img id="foodLogo" class="food-" [ngStyle]="{'background-color': selectedType.color}" [src]="selectedType.img"/></div></ion-row>
+      </ion-col>
+    </ion-row>  
+    <ion-row>
+      <ion-col>
+        <ion-row align-items-center>
+          <h4 class="info_text">{{selectedType.description}} </h4>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-row align-items-center>
+          <ion-list style="width: 100%;">
+            <ion-item style="width: 100%;" [ngStyle]="{'background-color': selectedType.color,'color':'white' }">
+              <h2 item-start>ALIMENTO</h2>
+              <h2 style="margin: 0;" item-end>RACIÓN</h2>
+            </ion-item>
+            <div *ngFor="let item of products">
+              <ion-item *ngIf="item.type == selectedType.type" style="width: 100%;" id="foodItems" [ngStyle]="{'color': selectedType.color }">
+                <h2>{{item.product}} </h2>
+                <p item-end>{{item.ration}}</p>
+              </ion-item>
+            </div>
+          </ion-list>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+<div *ngIf="selectedType.type=='portions'">
+  <div style="background-color: white; border-bottom: solid 3px #f8f8f8;">
+    <div col-12 style="text-align:center;background-color: white;">Tu dieta incluye porciones de diversos grupos de alimentos. Da Click en un grupo para saber más.</div>
+  </div>
+  <ion-card>
+    <ion-card-header>
+      <h1 class="FoodLabel">Grupos de alimentos</h1>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row align-items-center>
+          <ion-col (click)="showFoodInfo('cereals')">
+            <ion-row align-items-center><div class="FoodLabel"><img class="food-" style="background-color: #D76B40;" src="./assets/icons/cereales.png"/></div></ion-row>
+            <ion-row align-items-center><h2 class="FoodLabel">Cereales y tubérculos</h2></ion-row>
+          </ion-col>
+          <ion-col (click)="showFoodInfo('animal')">
+            <ion-row align-items-center><div class="FoodLabel"><img class="food-" style="background-color:#AD4753" src="./assets/icons/productosanimales.png"/></div></ion-row>
+            <ion-row align-items-center><h2 class="FoodLabel">Productos de origen animal</h2></ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+          <ion-col (click)="showFoodInfo('fruits')">
+            <ion-row align-items-center><div class="FoodLabel"><img class="food-" style="background-color:#5FBB4E" src="./assets/icons/frutas.png"/></div></ion-row>
+            <ion-row align-items-center><h2 class="FoodLabel">Frutas</h2></ion-row>
+          </ion-col>
+          <ion-col (click)="showFoodInfo('oils')">
+            <ion-row align-items-center><div class="FoodLabel"><img class="food-" style="background-color:#D1BA49" src="./assets/icons/oils&fats.png"/></div></ion-row>
+            <ion-row align-items-center><h2 class="FoodLabel">Aceites y grasas</h2></ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+          <ion-col (click)="showFoodInfo('legumes')">
+              <ion-row align-items-center><div class="FoodLabel"><img class="food-" style="background-color:#806354" src="./assets/icons/leguminosas.png"/></div></ion-row>
+              <ion-row align-items-center><h2 class="FoodLabel">Leguminosas</h2></ion-row>
+          </ion-col>
+          <ion-col (click)="showFoodInfo('lacteal')">
+              <ion-row align-items-center><div class="FoodLabel"><img class="food-" style="background-color:#7F8681" src="./assets/icons/lacteos.png"/></div></ion-row>
+              <ion-row align-items-center><h2 class="FoodLabel">Lácteos</h2></ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+          <ion-col (click)="showFoodInfo('vegetables')">
+            <ion-row align-items-center><div class="FoodLabel"><img class="food-" style="background-color:#345D4D" src="./assets/icons/verduras.png"/></div></ion-row>
+            <ion-row align-items-center><h2 class="FoodLabel">Verduras</h2></ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>  
+</div>
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button icon-only (click)="exit()"style="color: black;">
+          <ion-icon name="arrow-back" style="padding-left: 8px;"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>MI DIETA</ion-title>
+      <ion-buttons end>
+          <button ion-button (click)="saveSelection()">
+            <ion-icon name="save"></ion-icon> Guardar
+          </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <div *ngIf="weekDiet">
+    <ion-card>
+      <ion-card-header>
+        <ion-list style="font-size:2rem;">
+          <ion-label class="selectwidthauto">Seleccione un dia</ion-label>
+          <ion-select class="selectwidthauto" [(ngModel)]="daySelected" cancelText="Cancelar" okText="Listo">
+              <ion-option *ngFor="let dai of days" value="{{dai.value}}" selected="true">{{dai.day}}</ion-option> 
+          </ion-select>
+        </ion-list>
+      </ion-card-header>
+      <ion-card-content style="padding:0;">
+        <ion-grid>
+          <ion-row>
+              <ion-col col-12 size-md>
+                  <ion-list>
+                    <ion-item-group *ngFor="let food of foods index as j">
+                      <ion-item-divider class="collapsible {{food.type}}" (click)="openTab(food)">
+                        <ion-avatar item-start>
+                          <img src="{{food.img}}">
+                        </ion-avatar>                          
+                        <ion-label style="font-size: 2rem; margin-left: 15px;">{{food.title}}</ion-label>
+                        <button item-end style="background-color: transparent;">{{food.button}}</button>
+                      </ion-item-divider>
+                      <div class="ColContent {{food.type}}_col" id="{{food.title}}">
+                        <div *ngFor="let meals of mealtypes index as i" style="padding-bottom:11px;">
+                          <ion-list-header *ngIf="checkNumber(j,meals.type)">
+                            <ion-avatar item-start>
+                              <img src="{{getImg(i)}}">
+                            </ion-avatar>
+                            <h2>{{meals.title}}</h2>
+                          </ion-list-header>
+                          <ion-item *ngFor="let item of getItems(j,meals.type) index as product" (click)="SelectProduct(i,j,meals.type,product)">
+                            <h2>{{item.product}}</h2> 
+                            <p>{{item.ration}}</p>                             
+                          </ion-item>
+                        </div>  
+                      </div>
+                    </ion-item-group>
+                  </ion-list>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="food-icons" *ngFor="let food of foods index as j" (click)="openTab(food)"><img src="{{food.img}}"></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

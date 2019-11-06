@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>HÁBITO</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding no-margin>
+  <ion-card no-padding no-margin style="width:100%; height: 30%; background-position: center;">
+    <ion-row class="caption" align-items-center style="bottom: 40px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+      <img [src] = "userGoal.picture" />
+      <div col-12 class="card-title">{{ userGoal.name }}</div>
+      <hr align-self-center>
+      <p col-12 class="card-subtitle small-font">{{ userGoal.description }}</p>
+    </ion-row>
+  </ion-card>
+  <ion-card color="card-background" no-padding no-margin [ngStyle]="{'width': '100%', 'margin-top': '15px','background-color': '#EFEDF0'}">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 text-center>
+              <div style="background-color: #efedf0;">
+                <div col-12 style="text-align:center;background-color: #efedf0;">
+                  <p>En la siguiente gráfica verás los avances de tu hábito, para poder registrarlos debes hablar con tu Coach, ella te preguntará cómo te ha ido con estos hábitos. 20 significa muy bien, 10 más o menos y 1 muy mal.</p>
+                </div>
+              </div>
+            <div style="display: block;">
+                <canvas #habitCanvas></canvas>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-1 text-center></ion-col>
+          <ion-col col-2 text-center>
+            <div>20</div>
+            <div>Muy bien</div>
+          </ion-col>
+          <ion-col col-2 text-center>
+            <div>15</div>
+            <div>Bien</div>
+          </ion-col>
+          <ion-col col-2 text-center>
+            <div>10</div>
+            <div>Más o menos</div>
+          </ion-col>
+          <ion-col col-2 text-center>
+            <div>5</div>
+            <div>Mal</div>
+          </ion-col>
+          <ion-col col-2 text-center>
+            <div>1</div>
+            <div>No lo logré</div>
+          </ion-col>
+          <ion-col col-1 text-center></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <card-news [user_goal]="userGoal" ></card-news>
+</ion-content>

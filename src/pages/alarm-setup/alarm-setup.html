@@ -1,0 +1,54 @@
+<!--  -->
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="arrow-back" style="padding-left: 8px;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ alarmName }}</ion-title>
+    <!--ion-buttons right>
+      <button ion-button icon-only (click)="alarm()">
+        <ion-icon name="alarm" style="padding-right: 8px;"></ion-icon>
+      </button>
+    </ion-buttons-->
+  </ion-navbar>
+
+  <div style="background-color: white; border-bottom: solid 3px #f8f8f8;">
+    <div col-12 style="text-align:center;background-color: white;">Desliza un recordatorio hacia la izquierda</div>
+    <div col-12 style="text-align:center;background-color: white;">para editar o eliminar</div>
+  </div>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor='let reminder of reminders | async index as i'>
+      <ion-item>
+        <ion-toggle [(ngModel)]="reminder.status" (ionChange)="changeAlarmStatus(reminder)"></ion-toggle>
+        <ion-label  (click)="editAlarm(reminder)">
+          <h1>{{ reminder.hour }}</h1>
+          <p>{{ getAalarmName(reminder) }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button (click)="editAlarm(reminder)">
+          <ion-icon name="create"></ion-icon>
+          Editar
+        </button>
+        <button ion-button color="danger" (click)="deleteAlarm(reminder)">
+          <ion-icon name="trash"></ion-icon>
+          Eliminar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button color="primary" icon-start (click)='saveAlarm()' full>
+      <ion-icon ios="ios-add" md="md-add"></ion-icon>
+      Agregar
+    </button>
+  </ion-toolbar>
+</ion-footer>

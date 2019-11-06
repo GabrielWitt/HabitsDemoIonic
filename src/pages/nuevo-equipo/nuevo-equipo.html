@@ -1,0 +1,85 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button *ngIf="page1" ion-button icon-only (click)="closeWindow()"style="color: black;">
+        <ion-icon name="arrow-back" style="padding-left: 8px;"></ion-icon>
+      </button>
+      <button *ngIf="page2" ion-button icon-only (click)="closeWindow()">
+          <button ion-button color="danger" clear>Cancelar</button>
+      </button> 
+    </ion-buttons>
+    <ion-title>Nuevo Equipo</ion-title>
+    <ion-buttons end>
+        <button *ngIf="page1" ion-button style="color: black; border: solid 1px black; padding: 1px" (click)="nextPage()">Siguiente</button>
+        <button *ngIf="page2" ion-button style="color: black; border: solid 1px black; padding: 1px" (click)="newGrupoChat()">Crear Equipo</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content style="background-color: #eeeeee">
+  <!-- div *ngIf="percent" style="height: 50px;"><progress-bar  [progress]="percent" col-12 no-padding></progress-bar></div-->
+  <ion-list *ngIf="page== 1">
+    <ion-item style="background-color: #eeeeee;padding-right: 5%;">
+        <ion-label floating>Nombre del Equipo:</ion-label>
+        <ion-input type="text" [(ngModel)]="title"></ion-input>
+    </ion-item>
+    <ion-item *ngIf='picture == "./assets/imgs/notAvailable.jpg"' style="text-align: center; background-color: #eeeeee; margin-top: 5%;">
+        <img style="width: 60%; height: 60%; border-radius: 50%" [src]="picture"> <!-- | sanitize: 'resourceUrl' -->
+        <div style="font-size: 2.5rem; margin-top: -14%; margin-left: 20%; 
+        position: absolute; z-index: 999; background-color: #A9A9A9; border-radius: 50%; width: 10%; height: 15%; 
+        padding-top: 2px; padding-left: 1px;" (click)="addCameraPhoto(1)"><ion-icon name="camera"></ion-icon></div>
+        <div style="font-size: 2.5rem; margin-top: -14%; margin-left: 60%; 
+        position: absolute; z-index: 999; background-color: #A9A9A9; border-radius: 50%; width: 10%; height: 15%; 
+        padding-top: 2px; padding-left: 1px;" (click)="addCameraPhoto(2)"><ion-icon name="images"></ion-icon></div>
+    </ion-item>
+    <ion-item *ngIf='picture != "./assets/imgs/notAvailable.jpg"'>
+      <ion-label>Imagen Cargada <ion-icon name="checkbox"></ion-icon></ion-label>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="page == 2">
+ 
+	  <ion-row style="background-color: #eeeeee">  
+		  <ion-col col-12 style="text-align: center;">{{memberList.length}} Miembros</ion-col>
+	  </ion-row>
+	  <ion-scroll scrollX="true" scrollY="true" style="background-color: #eeeeee; height: 130px;">  
+		<div style="display: inline-flex;">
+		  <div *ngFor="let member of memberList index as j" style="width: 90px; margin-left: 4px;"> 
+			  <img *ngIf="!member.picture" [src]="member.photo" style="width: 90px; height: 90px; border-radius: 50%;">
+			  <img *ngIf="member.picture" [src]="member.picture" style="width: 90px; height: 90px; border-radius: 50%;">
+			  <div *ngIf="j != 0" style="margin-top: -20px; margin-left: 70px; position: absolute; z-index: 999; background-color: #A9A9A9; border-radius: 50%; width: 20px; height: 20px; padding-top: 2px; padding-left: 6px;" (click)="removeMember(j)">X</div>
+			<div style="text-align: center;">{{member.name}}</div>
+		  </div>
+		</div>
+	  </ion-scroll>
+	  <ion-row col-12 style="background-color: #eeeeee">  
+		  <ion-col col-12>
+			   <ion-item style="background-color: #fff;padding-right: 5%; ">
+					<ion-label > <ion-icon name="search"></ion-icon></ion-label>
+					<ion-input type="text" [(ngModel)]="searchText" placeholder="Buscar por nombre"></ion-input>
+				</ion-item>
+		   </ion-col>
+		</ion-row>
+	  <ion-list>
+		<ion-item *ngFor="let user of (members )  index as i" style="background-color: #eeeeee;">
+			<button ion-button color="#b8ea36" outline item-end style="height: 20px; width: 70px;" (click)="addMember(i )">Agregar</button>
+			  <ion-avatar *ngIf="!user.picture" item-start col-2 style="margin: 0;">      
+				  <img [src]="user.photo" style="width: 100%; height: 100%;">
+			  </ion-avatar>
+			  <ion-avatar *ngIf="user.picture" item-start col-2 style="margin: 0;">      
+				  <img [src]="user.picture" style="width: 100%; height: 100%;">
+			  </ion-avatar>
+		  <ion-row>
+			<ion-col>
+			  <h2>{{user.name}}</h2>
+			  <p>Puntos: {{user.points}}</p>
+			  <p>Hábitos:</p>
+			  <button ion-button style="height: 20px;font-size: 1rem;" color="#36B8EA" *ngFor="let goal of user.user_goal">{{goal}}</button>
+			  <p *ngIf="(user.user_goal==null || user.user_goal.length==0)">No disponibles.</p>
+			</ion-col>
+		  </ion-row>
+		</ion-item>
+	  </ion-list>
+	</div>
+</ion-content>

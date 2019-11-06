@@ -1,0 +1,78 @@
+page-reto-pasos {
+	.reto-title{
+		margin: 4px 3px 0 3px;
+		font-size: 1.2rem;
+		font-weight: bold;
+		white-space: normal;
+	}
+	
+	.reto-text{
+		margin: 2px 3px 0 3px;
+		font-size: 1rem;
+		font-weight: 500;
+		white-space: normal;
+	}
+
+	.reto-duration{
+		margin: 5px 3px 0 13px;
+		font-size: 0.9rem;
+		font-weight: 500;
+		white-space: normal;
+		position: absolute;
+		bottom: 5vh;
+	}
+
+	.activity_css{
+		color: white;
+		background-color: #22A8E7;
+		border-top-right-radius: 25px;
+		border-bottom-left-radius: 25px;
+		height: 13.5vh;
+	}
+	
+	.reto_css{
+		color: white;
+		background-color: #8A56AB;
+		border-top-right-radius: 25px;
+		border-bottom-left-radius: 25px;
+		height: 13.5vh;
+	}
+
+	.test_css{
+		color: white;
+		background-color: #9599B4;
+		border-top-right-radius: 25px;
+		border-bottom-left-radius: 25px;
+		height: 13.5vh;
+	}
+	
+	.reto-item{
+		border-bottom: 1px solid #dedede;
+		
+		.item-inner{
+			border-bottom: none !important;
+		}
+		
+		ion-thumbnail img{
+			    border-radius: 10px;
+		}
+		
+		
+	}
+    
+    .dash_icons{
+        text-align: center;
+        font-size: 1.8rem;
+        margin: 0 0 0 28% !important;
+        padding: 0 !important;
+        color:#CFD3D6;
+    }
+    
+    .dash_icons_active{
+        text-align: center;
+        font-size: 1.8rem;
+        margin: 0 0 0 28% !important;
+        padding: 0 !important;
+        color:#36A2EB !important;
+	}
+}

@@ -1,0 +1,67 @@
+<ion-content *ngIf="!RESULTS" style="color: white;background: url('./assets/Fondoquiz.jpg'); background-color: skyblue;" padding>
+  <ion-grid>
+    <ion-row >
+      <ion-col col-2>
+        <button ion-button icon-only outline style="border: none" (click)="prevQuestion()" [hidden]="indexQuestion==0">
+            <ion-icon name="ios-arrow-back"  style="color: white;font-size: 50px;margin-right: -12px;"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col >
+        <ion-title style="color: white !important; text-align: center" ><p style="color: white !important; text-align: center; white-space: normal ;margin-bottom:5px; margin-top: 0;     padding: 0 3px;" *ngIf="test">{{test.name}}</p></ion-title>
+      </ion-col>
+      <ion-col col-2>
+          <button ion-button icon-only outline style="border: none" (click)="nextQuestion()" [hidden]="button2()">
+              <ion-icon name="ios-arrow-forward" style="color: white;font-size: 50px;margin-left: -12px;"></ion-icon>
+          </button>
+      </ion-col>
+    </ion-row>
+	  <ion-row style="margin-bottom: 20px;">          
+      <ion-col >
+				<p style="color: black !important; text-align: center; white-space: normal; margin: 0;" *ngIf="test">{{(indexQuestion + 1)}} {{label.connector}} {{questionsNumber}}</p>
+      </ion-col>          
+    </ion-row>
+    <ion-row style="height:50%; text-align: center">
+		 <ion-col >
+			<h3 style="color: white; width: 100%;">{{ actualQuestion.text }}</h3>
+		 </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-grid *ngIf="actualQuestion.type.html == 'range'"> 
+    <ion-row style="text-align:center;">
+      <ion-col style="width:49%"></ion-col>
+      <ion-col><label class="white-text" style="left: 42%; width: 35px; padding: 10px;top: -60px;align-items: center;text-align: center;border: 2px solid white;border-radius: 50px;">{{oneToTen}}</label></ion-col>
+      <ion-col style="width:49%"></ion-col>
+    </ion-row>
+    <ion-row ><ion-col col-12>      
+      <ion-range [min] = "actualQuestion.type.min" [max] = "actualQuestion.type.max" [(ngModel)]="oneToTen" color="secondary">
+        <ion-label range-left>{{ actualQuestion.type.min }}</ion-label>
+        <ion-label range-right>{{ actualQuestion.type.max }}</ion-label>
+      </ion-range>
+    </ion-col></ion-row>
+    <ion-row style="text-align:center;">
+      <ion-col style="width:30%;text-align: left;">{{label.agree}}</ion-col>
+      <ion-col style="width:40%;text-align: left;"></ion-col>
+      <ion-col style="width:30%;text-align: right;">{{label.disagree}}</ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="actualQuestion.type.html == 'toggle'">
+    <ion-row>
+      <ion-label style="text-align: right;">{{label.no}}</ion-label>
+      <ion-toggle [(ngModel)]="yesNo"></ion-toggle>
+      <ion-label style="margin-left: 8px;">{{label.yes}}</ion-label>		
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="actualQuestion.type.html == 'select'">
+    <ion-row style="margin-left: 40%; font-size: 2rem;">
+      <ion-select [(ngModel)]="selectInpunt" style="border: 2px White solid; border-radius:10px;" cancelText="Cancelar">
+        <ion-option *ngFor="let option of actualQuestion.type.options index as j" value='{{option}}' >{{option}}</ion-option>
+      </ion-select>
+    </ion-row>
+  </ion-grid>
+ 
+  <ion-grid style="width: 70%;" [hidden]="button1()">
+      <button style="border: 2px solid white; color: white; text-transform: uppercase; " (click)="SendData()" ion-button round outline>{{label.next}}</button>
+  </ion-grid>
+</ion-content>

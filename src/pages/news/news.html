@@ -1,0 +1,150 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{label.title}}</ion-title>
+  </ion-navbar>
+  <ion-row style="background-color: #4bbbec;" *ngIf="false">
+    <ion-col class="{{styleClass}}">
+      <button (click)="openTab('newsTab')" color="light" *ngIf="!active" class="activated" ion-button outline [ngStyle]="{'width': '100%'}">{{label.news}}</button>
+      <button (click)="openTab('newsTab')" color="light" *ngIf="active" ion-button outline [ngStyle]="{'width': '100%'}">{{label.news}}</button>
+    </ion-col>
+    <ion-col class="{{styleClass}}">
+      <button (click)="openTab('rankingTab')" color="light" *ngIf="active" class="activated" ion-button outline icon-start [ngStyle]="{'width': '100%'}">
+        <ion-icon name="sync" *ngIf = "ranking.length == 0"></ion-icon>{{label.ranking}}
+      </button>
+      <button (click)="openTab('rankingTab')" color="light" *ngIf="!active"ion-button outline icon-start [ngStyle]="{'width': '100%'}">
+        <ion-icon name="sync" *ngIf = "ranking.length == 0"></ion-icon>{{label.ranking}}
+      </button>
+    </ion-col>
+    <!--<ion-col  class="{{styleClass}}" *ngIf="styleClass == 'XD'"> user.company.uid != '-LMImXWqGEKNG5bxi4wL'  -->
+      <!--<button (click)="openTab('badgesTab')" color="light" [class.activated] ="selectedTab == 'badgesTab'" ion-button outline [ngStyle]="{'width': '100%'}">Insignias</button>
+    </ion-col>-->
+  </ion-row>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-grid *ngIf="selectedTab == 'newsTab'" class="city">
+    <ion-item *ngIf="!news.length" > <p style="white-space: normal;">{{label.no_news}} </p></ion-item>
+    <ion-card *ngFor='let article of news index as i'>
+      <img-loader [src]="article.picture" [fallbackUrl]="'./assets/imgs/news1.png'" [fallbackAsPlaceholder]="true" useImg></img-loader>
+      <!--<img [src]="article.picture" />-->
+      <ion-card-content>
+        <ion-card-title>
+          {{article.title}}
+        </ion-card-title>
+        <p>
+          {{article.description}}
+        </p>
+      </ion-card-content>
+      <ion-row no-padding>
+        <ion-col text-right>
+          <button ion-button clear small color="danger" icon-start (click)="linkNotice(article)">
+            <ion-icon name='share-alt'></ion-icon>
+            {{label.read_more}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-grid>
+  
+  
+  
+
+  <ion-grid *ngIf="selectedTab == 'rankingTab'" class="city" style="padding: 0; margin: 0;">
+
+    <div class="row" style="width: 100%; text-align: center; background-color: #4bbbec;">
+      <div [ngClass]="RankShow == true ? 'onSelectedOption' : 'notSelectedOption'" (click)="changeRank()">{{label.teams}}</div>
+      <div [ngClass]="RankShow == false ? 'onSelectedOption' : 'notSelectedOption'" (click)="changeRank()">{{label.solo}}</div>
+    </div>
+    <div *ngIf="!RankShow">
+      <ion-row style="text-align: center; background: linear-gradient(#4bbbec, #0054D4); padding: 0; width: 100%; height: 25vh; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" *ngIf="false">
+        <ion-col col-4 style="color: white; vertical-align:middle; padding-top: 8%;">
+          <div><h1># {{firstPlace.number }}</h1></div>
+          <div>{{firstPlace.name }}</div>
+        </ion-col>
+        <ion-col col-4>
+          <img-loader *ngIf="firstPlace.picture" class="img-circle img-FP" margin-top [src]="firstPlace.picture" [fallbackUrl]="'./assets/user_icons/icon0.png'" [fallbackAsPlaceholder]="true"></img-loader>
+        </ion-col>
+        <ion-col col-4 style="color: white; vertical-align:middle; padding-top: 20%;">{{ firstPlace.points }} pts</ion-col>
+      </ion-row>
+      <ion-list padding class="ranking">
+        <ion-item *ngFor="let person of ranking index as j" (click)="selectRank(person,j)" [ngClass]="{active: person.uid == user.uid, 'linea-azul': j == 3 &&  person.pos != 4}">
+			<ion-thumbnail item-start>
+                <img class="img-circle" [src]="person?person.picture:'./assets/user_icons/icon0.png'">
+                <!--<img class="img-circle" *ngIf="!person.picture" [src]="'./assets/user_icons/icon0.png'">
+                <img-loader *ngIf="person.picture" class="img-circle img-FP-s"  [src]="person.picture" [fallbackUrl]="'./assets/user_icons/icon0.png'" [fallbackAsPlaceholder]="true"></img-loader>-->
+            </ion-thumbnail>
+            <h2>{{person.name}}</h2>
+            <h3> {{ person.points}} pts</h3>
+            <ion-note item-end>{{ person.pos }}</ion-note>
+			
+        </ion-item>
+      </ion-list>
+    </div>
+    <div *ngIf="RankShow">
+      <ion-row style="text-align: center; background: linear-gradient(#4bbbec, #0054D4); padding: 0; width: 100%; height: 25vh; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+        <ion-col col-4 style="color: white; vertical-align:middle; padding-top: 8%;">
+          <div><h1># {{firstTeam.number }}</h1></div>
+          <div>{{firstTeam.name }}</div>
+        </ion-col>
+        <ion-col col-4>
+          <img-loader *ngIf="firstTeam.picture" class="img-circle img-FP" margin-top [src]="firstTeam.picture" [fallbackUrl]="'./assets/img/LogoHabitsOver_Blanco.png'" [fallbackAsPlaceholder]="true"></img-loader>
+        </ion-col>
+        <ion-col col-4 style="color: white; vertical-align:middle; padding-top: 20%;">{{ firstTeam.points }} pts</ion-col>
+      </ion-row>
+      <ion-list padding class="ranking">
+        <ion-item *ngFor="let team of team_ranking index as j" (click)="selectRank(person,j)">
+            <ion-thumbnail item-start>
+                <img class="img-circle" [src]="team?team.picture:'./assets/img/LogoHabitsOver.png'">
+                <!--<img class="img-circle" *ngIf="!person.picture" [src]="'./assets/user_icons/icon0.png'">
+                <img-loader *ngIf="person.picture" class="img-circle img-FP-s"  [src]="person.picture" [fallbackUrl]="'./assets/user_icons/icon0.png'" [fallbackAsPlaceholder]="true"></img-loader>-->
+            </ion-thumbnail>
+            <h2>{{team.name}}</h2>
+            <h3>{{team.points}} pts</h3>
+            <ion-note item-end>{{j+1}}</ion-note>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-grid>
+  
+  
+  
+</ion-content>
+<ion-footer style="background-color: #F8F8F8">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('DashboardPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="home"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">INICIO</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('SocialPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="people"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">CHATS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('RetoPasosPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="calendar"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">RETOS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('ranking')">
+          <ion-row col-12 class="dash_icons" style="color:#36A2EB !important;"><ion-icon name="trophy"></ion-icon></ion-row>
+          <ion-row col-12 style="color:#36A2EB !important;text-align: center;font-size: 1.2rem;margin-left: 3%;">RANK</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('MenuPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="menu"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">MENU</ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

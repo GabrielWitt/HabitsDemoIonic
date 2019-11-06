@@ -1,0 +1,215 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back()"style="color: black;">
+        <ion-icon name="arrow-back" style="padding-left: 8px;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>DIETA</ion-title>
+    <ion-buttons end>
+        <button *ngIf="selectedType.show=='diet_ready'" ion-button (click)="openReminders()">
+          <ion-icon name="alarm" style="margin-right: 5px;"></ion-icon> Alertas
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-card *ngIf="dietCheck" class="diet-card">
+    <ion-card-header> 
+        <h1 style="font-weight: bold;">{{getDay(actualDay)}}</h1>
+        <h2>Es hora de: {{checkWeekDiet}}</h2>
+        <p>Horario de {{nextfood.start?nextfood.start:5}} a {{nextfood.end}} horas</p>
+    </ion-card-header>
+  </ion-card>  
+</ion-header>
+
+<ion-content>
+  <ion-card class="diet-card">
+    <ion-card-content *ngIf="selectedType.show=='diet_ready'">  
+        <ion-slides #Slides style="padding:0;margin:0;width: 100%">
+            <ion-slide>
+              <ion-list>                
+                <ion-row style="margin-top:10px; margin-bottom:10px;">
+                    <ion-col col-2 text-left>
+                      <!--img (click)="prevSlide()" style="width:65%;left: 0; position: absolute;" src="./assets/icons/prev.png"-->           
+                    </ion-col>
+                  <ion-row col-8 justify-content-center align-self-center>
+                      <h1>{{foodtime[0].title}}</h1>
+                  </ion-row>
+                  <ion-col col-2 text-right (click)="nextSlide()">
+                      <img style="width:65%;right: 0; position: absolute;" src="./assets/icons/next.png"> 
+                  </ion-col>
+                </ion-row>    
+                <div *ngFor="let item of types">           
+                  <ion-item *ngIf="dietData[0][item.type]!='0'" (click)="showFoodInfo(item.type)">
+                    <ion-avatar item-start>
+                      <img src="{{item.img}}">
+                    </ion-avatar>
+                    <h2>{{item.title}} </h2>
+                    <p item-end>{{dietData[0][item.type]}}</p>
+                  </ion-item>
+                </div> 
+              </ion-list>
+            </ion-slide>
+            <ion-slide>
+              <ion-list>             
+                <ion-row style="margin-top:10px; margin-bottom:10px;">
+                    <ion-col col-2 text-left (click)="prevSlide()">
+                      <img style="width:65%;left: 0; position: absolute;" src="./assets/icons/prev.png">            
+                    </ion-col>
+                  <ion-row col-8 justify-content-center align-self-center>
+                      <h1>{{foodtime[1].title}}</h1>
+                  </ion-row>
+                  <ion-col col-2 text-right (click)="nextSlide()">
+                      <img style="width:65%;right: 0; position: absolute;" src="./assets/icons/next.png"> 
+                  </ion-col>
+                </ion-row>     
+                <div *ngFor="let item of types">           
+                  <ion-item *ngIf="dietData[1][item.type]!='0'" (click)="showFoodInfo(item.type)">
+                    <ion-avatar item-start>
+                      <img src="{{item.img}}">
+                    </ion-avatar>
+                    <h2>{{item.title}} </h2>
+                    <p item-end>{{dietData[1][item.type]}}</p>
+                  </ion-item>
+                </div> 
+              </ion-list>
+            </ion-slide>
+            <ion-slide>
+              <ion-list>             
+                <ion-row style="margin-top:10px; margin-bottom:10px;">
+                    <ion-col col-2 text-left (click)="prevSlide()">
+                      <img style="width:65%;left: 0; position: absolute;" src="./assets/icons/prev.png">            
+                    </ion-col>
+                  <ion-row col-8 justify-content-center align-self-center>
+                      <h1>{{foodtime[2].title}}</h1>
+                  </ion-row>
+                  <ion-col col-2 text-right (click)="nextSlide()">
+                      <img style="width:65%;right: 0; position: absolute;" src="./assets/icons/next.png"> 
+                  </ion-col>
+                </ion-row>     
+                <div *ngFor="let item of types">           
+                  <ion-item *ngIf="dietData[2][item.type]!='0'" (click)="showFoodInfo(item.type)">
+                    <ion-avatar item-start>
+                      <img src="{{item.img}}">
+                    </ion-avatar>
+                    <h2>{{item.title}} </h2>
+                    <p item-end>{{dietData[2][item.type]}}</p>
+                  </ion-item>
+                </div> 
+              </ion-list>
+            </ion-slide>
+            <ion-slide>
+              <ion-list>             
+                <ion-row style="margin-top:10px; margin-bottom:10px;">
+                    <ion-col col-2 text-left (click)="prevSlide()">
+                      <img style="width:65%;left: 0; position: absolute;" src="./assets/icons/prev.png">            
+                    </ion-col>
+                  <ion-row col-8 justify-content-center align-self-center>
+                      <h1>{{foodtime[3].title}}</h1>
+                  </ion-row>
+                  <ion-col col-2 text-right (click)="nextSlide()">
+                      <img style="width:65%;right: 0; position: absolute;" src="./assets/icons/next.png"> 
+                  </ion-col>
+                </ion-row>      
+                <div *ngFor="let item of types">           
+                  <ion-item *ngIf="dietData[3][item.type]!='0'" (click)="showFoodInfo(item.type)">
+                    <ion-avatar item-start>
+                      <img src="{{item.img}}">
+                    </ion-avatar>
+                    <h2>{{item.title}} </h2>
+                    <p item-end>{{dietData[3][item.type]}}</p>
+                  </ion-item>
+                </div> 
+              </ion-list>
+            </ion-slide>
+            <ion-slide>
+              <ion-list>             
+                <ion-row style="margin-top:10px; margin-bottom:10px;">
+                    <ion-col col-2 text-left (click)="prevSlide()">
+                      <img style="width:65%;left: 0; position: absolute;" src="./assets/icons/prev.png">            
+                    </ion-col>
+                  <ion-row col-8 justify-content-center align-self-center>
+                      <h1>{{foodtime[4].title}}</h1>
+                  </ion-row>
+                  <ion-col col-2 text-right>
+                    <!--img (click)="nextSlide()" style="width:65%;right: 0; position: absolute;" src="./assets/icons/next.png"--> 
+                  </ion-col>
+                </ion-row>     
+                <div *ngFor="let item of types">           
+                  <ion-item *ngIf="dietData[4][item.type]!='0'" (click)="showFoodInfo(item.type)">
+                    <ion-avatar item-start>
+                      <img src="{{item.img}}">
+                    </ion-avatar>
+                    <h2>{{item.title}} </h2>
+                    <p item-end>{{dietData[4][item.type]}}</p>
+                  </ion-item>
+                </div> 
+              </ion-list>
+            </ion-slide>
+            <!--<ion-slide *ngFor="let meals of todaymeal index as title">
+              {{foodtime[title].title}}
+              <ion-list>
+                <ion-list-header>{{foodtime[title].title}}</ion-list-header>  
+                <ion-item *ngFor="let item of meals">
+                  <ion-avatar item-start>
+                    <img src="{{item.icon}}">
+                  </ion-avatar>
+                  <h2>{{item.product}} </h2>
+                  <p item-end>{{item.ration}}</p>
+                </ion-item>   
+              </ion-list>
+            </ion-slide -->       
+          </ion-slides>      
+    </ion-card-content> 
+    <ion-card-content class="diet-card-content-no-diet" *ngIf="selectedType.show=='nodiet'">  
+      {{nodiet}}
+    </ion-card-content>  
+    <ion-card-content *ngIf="selectedType.show=='portions'"> 
+      <div style="overflow-y: scroll;">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-row align-items-center><h1 class="FoodLabel">{{selectedType.title}} </h1></ion-row>
+              <ion-row align-items-center><div class="FoodLabel"><img id="foodLogo" class="food-" [ngStyle]="{'background-color': selectedType.color}" [src]="selectedType.img"/></div></ion-row>
+            </ion-col>
+          </ion-row>  
+          <ion-row>
+            <ion-col>
+              <ion-row align-items-center>
+                <h4 class="info_text">{{selectedType.description}} </h4>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-row align-items-center class="portion_class">
+                <ion-list style="width: 100%;">
+                  <ion-item style="width: 100%;" [ngStyle]="{'background-color': selectedType.color,'color':'white' }">
+                    <h2 item-start>ALIMENTO</h2>
+                    <h2 style="margin: 0;" item-end>RACIÓN</h2>
+                  </ion-item>
+                  <div *ngFor="let item of products">
+                    <ion-item *ngIf="item.type == selectedType.type" style="width: 100%;" id="foodItems" [ngStyle]="{'color': selectedType.color }">
+                      <h2>{{item.product}} </h2>
+                      <p item-end>{{item.ration}}</p>
+                    </ion-item>
+                  </div>
+                </ion-list>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>  
+  </ion-card>
+  <ion-fab left bottom> <!-- *ngIf="!diet.breakfast[0]"--> 
+      <button ion-fab color="primary" (click)="openPage('test')">
+        <ion-icon name="create"></ion-icon>
+      </button>
+  </ion-fab>
+  <!--<ion-fab left bottom>  
+      <button ion-fab color="primary" (click)="openPage('info')">
+        <ion-icon name="pizza"></ion-icon>
+      </button>
+  </ion-fab>--> 
+</ion-content>
+

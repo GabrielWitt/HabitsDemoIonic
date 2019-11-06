@@ -1,0 +1,70 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{activity.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid *ngIf="!activity.user_answer||activity.status=='No aprobado'">
+    <ion-row>
+      <ion-col col-12>Instrucciones:</ion-col>
+      <ion-col col-12 style="text-align: center; font-weight: bold;" *ngFor="let line of activity.rules.split('-salto-')">{{line}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 *ngIf="activity.type=='writing'&&activity.user_answer">
+        <ion-col *ngIf="activity.type=='writing'" col-12><ion-label fixed>Escribiste:</ion-label></ion-col>
+        <p col-12 *ngFor="let lines of activity.user_answer.split('-salto-')">{{lines}}</p>
+      </ion-col>
+      <ion-col *ngIf="activity.type=='writing'" col-12><ion-label fixed>Escribe:</ion-label></ion-col>
+      <ion-col *ngIf="activity.type=='image_upload'" col-12><ion-label fixed>Sube tu foto:</ion-label></ion-col>
+      <ion-col col-12 *ngIf="activity.lines">
+        <ion-input style="width: 100%;" *ngFor="let input of activity.lines" type="text" [(ngModel)]="input.value" ></ion-input>
+      </ion-col>
+      <ion-col col-12 *ngIf="activity.textarea">
+        <textarea rows="5" style="width: 100%;" [(ngModel)]="text_area"></textarea>
+      </ion-col>
+      <ion-col col-12 *ngIf="activity.type=='image_upload'&&activity.image==''&&!progress" style="text-align: center;">
+        <img src="./assets/imgs/upload_image.png" (click)='addCameraPhoto()'>
+      </ion-col>
+      <ion-col col-12 *ngIf="progress">
+        Cargando imagen: <progress-bar [progress]="progress" col-12 no-padding></progress-bar>
+      </ion-col>
+      <ion-col col-12 *ngIf="activity.type=='image_upload'&&activity.image!=''&&!progress" style="text-align: center;">
+        <img [src]="activity.image" (click)='addCameraPhoto()'>
+      </ion-col>
+      <ion-col col-12 *ngIf="activity.type=='image_upload'&&activity.image!=''&&!progress&&activity.send"  style="text-align: center;">
+        Presiona sobre la imagen para tomar otra foto o presione enviar para completar la actividad.
+      </ion-col>
+      <ion-col col-8>Puntos: {{activity.points}}</ion-col><ion-col col-3><button ion-button round *ngIf="activity.send" (click)="sendActivity()">Enviar</button></ion-col><ion-col col-1></ion-col>
+    </ion-row>
+    <ion-row *ngIf='activity.status=="No aprobado"'>
+        <div col-6 style='color: black;text-transform: uppercase; text-align: center;'>STATUS:</div>
+        <div col-6 style='color: red;text-transform: uppercase;'>{{activity.status}}</div>
+        <div col-12>Puedes enviar nuevamente la actividad mientras esté disponible.</div>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="activity.user_answer&&activity.status!='No aprobado'">
+    <ion-row>
+      <ion-col col-12>Instrucciones:</ion-col>
+      <ion-col col-12 style="text-align: center; font-weight: bold;" *ngFor="let line of activity.rules.split('-salto-')">{{line}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12><ion-label fixed>Tu actividad:</ion-label></ion-col>
+      <ion-col col-12 *ngIf="activity.type=='writing'">
+        <p *ngFor="let lines of activity.user_answer.split('-salto-')">{{lines}}</p>
+      </ion-col>
+      <ion-col col-12 *ngIf="activity.type=='image_upload'" style="text-align: center;">
+        <img [src]="activity.user_answer">
+      </ion-col>
+      <ion-col col-1></ion-col><ion-col col-4>Puntos: {{activity.points}}</ion-col><ion-col col-2></ion-col><ion-col col-4>Enviado: {{activity.timestamp | date: "dd/MMM" }}</ion-col><ion-col col-1></ion-col>
+    </ion-row>
+    <ion-row>
+        <div col-6 style='color: black;text-transform: uppercase; text-align: center;'>STATUS:</div>
+        <div col-6 style='color: orange;text-transform: uppercase;' *ngIf='activity.status=="Pendiente"'>{{activity.status}}</div>
+        <div col-6 style='color: limegreen;text-transform: uppercase;' *ngIf='activity.status=="Aprobado"'>{{activity.status}}</div>
+        <div col-6 style='color: red;text-transform: uppercase;' *ngIf='activity.status=="No aprobado."' >{{activity.status}}</div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

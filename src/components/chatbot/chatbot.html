@@ -1,0 +1,64 @@
+<ion-content id="ChatScroll" (ionScrollEnd)="onScrollStart()" style="background-color: #f0eff5;" [scrollDownOnLoad]="true">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list no-lines *ngIf="showmessages" #scrollMe>
+    <ion-item *ngFor="let chatMessage of showmessages index as i" class="chat-item">
+        <!-- Burbuja del bot -->
+        <ion-avatar item-left *ngIf="chatMessage.user == 'BOT-001'">
+          <img [src]="chatBotRoom.imagen">
+          <div style="text-align: center; font-size:0.9rem"> Ana </div>
+        </ion-avatar>
+        <div class="you animated" [class.fadeIn]="i == (messages.length - 1)" *ngIf="chatMessage.user == 'BOT-001'">
+          <div id="TEXTO" *ngIf="chatMessage.type == 'text'" style="color:white;">{{ chatMessage.message }}</div>
+          <div id="VIDEO" *ngIf="chatMessage.type == 'video'">
+            <img style="border-radius:  0 !important;" *ngIf="!authProvider.AppIsOnline()" width="100%" src="./assets/YoutubeOffline.jpg" alt="">
+            <iframe *ngIf="authProvider.AppIsOnline()" width="100%" [src]="chatMessage.message | sanitize: 'resourceUrl'" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div id="IMG" *ngIf="chatMessage.type == 'img'" >
+            <img style="border-radius:  0 !important;" width="100%" #imageToView [src]="chatMessage.message" (tap)="tapEvent(imageToView)">
+          </div>
+          <div style="text-align: end; font-size:0.7rem">{{ chatMessage.timestamp | date:'short' }}</div>
+        </div>
+        <!-- Burbuja del coach -->
+        <ion-avatar item-left *ngIf="chatMessage.user != 'BOT-001' && chatMessage.user != user.uid">
+          <img style="border-radius:  0 !important;" src="./assets/user_icons/oldcoach.png">
+          <div style="text-align: center; font-size:0.9rem"> Human Coach</div>
+        </ion-avatar>
+        <div class="you animated" [class.fadeIn]="i == (messages.length - 1)" *ngIf="chatMessage.user != 'BOT-001' && chatMessage.user != user.uid">
+          <div id="TEXTO" *ngIf="chatMessage.type == 'text'" style="color:white;">{{ chatMessage.message }}</div>
+          <div id="VIDEO" *ngIf="chatMessage.type == 'video'">
+            <iframe width="100%" [src]="chatMessage.message | sanitize: 'resourceUrl'" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div id="IMG" *ngIf="chatMessage.type == 'img'" >
+            <img style="border-radius:  0 !important; min-height: 130px;" width="100%" #imageToView [src]="chatMessage.message" (tap)="tapEvent(imageToView)">
+          </div>
+          <div style="text-align: end; font-size:0.7rem">{{ chatMessage.timestamp | date:'short' }}</div>
+        </div>
+        <!-- Burbuja del usuario -->
+        <ion-avatar item-right *ngIf="chatMessage.user == user.uid">
+          <img-loader [src]="user.picture" useImg></img-loader>
+        </ion-avatar>
+        <div class="me animated" [class.fadeIn]="i == (messages.length - 1)" *ngIf="chatMessage.user == user.uid">
+          <div id="TEXTO" *ngIf="chatMessage.type == 'text'" [innerHTML]="chatMessage.message" style="color:#36b8ea;"></div>
+          <div style="text-align: end; font-size:0.7rem">{{ chatMessage.timestamp | date:'short' }}</div>
+        </div>
+    </ion-item>
+    <!-- Burbuja del waiting -->
+    <ion-item class="chat-item" *ngIf="subtitle == 'escribiendo...'">
+      <ion-avatar item-left>
+        <img [src]="chatBotRoom.imagen">
+      </ion-avatar>
+      <div style="width: 30% !important; margin-right: 60%;" class="you animated" [class.fadeIn]="subtitle == 'escribiendo...'" [class.fadeOut]="subtitle != 'escribiendo...'" >
+        <div id="IMG" style="text-align:center;">
+          <img width="40%" src="./assets/waitingif.gif">
+        </div>
+      </div>
+    </ion-item>
+    <div id="check-point"></div>
+  </ion-list> 
+  <ion-fab right bottom *ngIf="bottom" style="margin-bottom:25px;">
+		<ion-badge item-end *ngIf="badge" color="danger" class="bagde-ana">{{badge}}</ion-badge>
+    <button *ngIf="bottom" ion-fab mini (click)="goBottom();"><ion-icon name="arrow-down" ></ion-icon></button>
+  </ion-fab>
+ </ion-content>

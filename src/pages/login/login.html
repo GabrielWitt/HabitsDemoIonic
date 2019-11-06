@@ -1,0 +1,49 @@
+<ion-content no-padding>
+  <div class="splash-bg" padding>
+    <ion-row>
+      <ion-col col-12 style="text-align:center; margin-bottom: 15%;">
+        <ion-label style="font-size: 2.5rem;">Iniciar Sesión</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 style="text-align:center;">
+        <img id="IMAGEN" style="width:65%; background-color:transparent;" src="./assets/img/LogoHabitsOver.png">
+      </ion-col>
+    </ion-row>
+        <ion-list>
+          <form>
+            <ion-row>
+              <ion-col col-12 style="text-align:center;">
+                <ion-label class="lblNormalWhite">¿Nuevo en Habits?</ion-label>
+                <ion-label class="lblNormalWhite">Crea una cuenta</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <button ion-button round block class="btnBlueRounded" (click)="register()">REGÍSTRATE</button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="colBottomBorder">
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 style="text-align:center;">
+                <ion-label class="lblSmallWhite">¿Ya tienes un usuario? Inicia sesión</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <button ion-button round block class="btnTransparentRounded" (click)="signIn('login')"z>INICIAR SESIÓN</button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-list>
+  </div>      
+</ion-content>
+
+
+
+
+
+
+
+

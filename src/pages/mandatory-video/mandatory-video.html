@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <ion-title>{{label.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <iframe id="player" type="text/html" *ngIf='!getLock()' width="100%" height="50%" [src]="video" frameborder="0" allowfullscreen></iframe>
+  <div *ngIf="getLock()" style="position: absolute; width:100%;">
+      <div id="player"></div>
+  </div>  
+  <div *ngIf="getLock()" (click)="onClick()" style="position: relative; width:100%; top: 0;"><img src="./assets/img/dot.png" width="100%"></div>  
+  <ion-row *ngIf="getLock()">
+    <div col-4 style="text-align:center;">
+      <ion-chip>
+        <ion-icon *ngIf="icon == 'videocam'" name="videocam" color="primary"></ion-icon>
+        <ion-icon *ngIf="icon == 'checkmark'" name="checkmark" color="success"></ion-icon>
+        <ion-icon *ngIf="icon == 'play'" name="play" color="primary"></ion-icon>
+        <ion-icon *ngIf="icon == 'pause'" name="pause" color="primary"></ion-icon>
+        <ion-label> {{checkPercent()}}</ion-label>
+      </ion-chip>
+    </div>  
+    <div col-8 style="text-align:center;">
+      <ion-chip (click)="backTenSecs()">
+        <ion-icon name="rewind" color="primary"></ion-icon>
+      </ion-chip>
+      <ion-chip  *ngIf="icon == 'play'" (click)="pauseVideo()">
+        <ion-icon name="pause" color="primary"></ion-icon>
+      </ion-chip>
+      <ion-chip *ngIf="icon != 'play'" (click)="playVideo()">
+        <ion-icon name="play" color="primary"></ion-icon>
+      </ion-chip>
+      <ion-chip (click)="restartVideo()">
+        <ion-icon name="square" color="primary"></ion-icon>
+      </ion-chip>
+    </div>  
+  </ion-row>
+  <div *ngIf='getLock() && (playing == "done" || CurrentTime>89) && checkVideoComplenion()'>
+    <div style="text-align:center; width: 100%">
+        <button ion-button color="#36b8ea" (click)="DoneVideo()">{{label.finish}} </button> 
+    </div>
+  </div>
+</ion-content>

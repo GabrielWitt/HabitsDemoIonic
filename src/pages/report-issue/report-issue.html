@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="closeFaq()">
+        <ion-icon name="arrow-back" style="padding-left: 8px;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{label.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="questionlist" class="faq_margin">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="search" item-start></ion-icon>
+        <ion-input placeholder="Buscar" [(ngModel)]="searchText" (keydown)='search_word()'></ion-input>
+        <button ion-button outline item-end (click)="search_word()">Buscar</button>
+      </ion-item>
+    </ion-list>
+    <ion-list no-lines>
+      <button ion-item *ngFor="let faq of list_question" (click)="loadFaqButton(faq)">
+        {{faq.question}}
+      </button> 
+      <button *ngIf="list_question==[]" (click)="reportError()">
+          No se han encontrado preguntas relacionadas con este tema.
+      </button>
+    </ion-list>
+  </div>
+  <div *ngIf="showquestion" class="faq_margin">
+    <h2>
+      {{selectedQuestion.question}}
+    </h2>
+    <img style="max-height: 55vh;" *ngIf="selectedQuestion.tip.type == 'image'" [src]="selectedQuestion.tip.url"/>
+    <hr *ngIf="selectedQuestion.tip.type == 'link'" >
+    <h4>
+      {{selectedQuestion.answer}}
+    </h4>
+    <hr *ngIf="selectedQuestion.tip.type == 'image'">
+    <div *ngIf="selectedQuestion.tip.type == 'image'">
+      <h4>
+        {{selectedQuestion.tip.text}}
+      </h4>
+    </div>
+    <div *ngIf="selectedQuestion.tip.type == 'link'">        
+      <ion-row no-padding>
+        <ion-col text-right>
+          <button ion-button clear small color="danger" (click)="openlink(selectedQuestion.tip.url)">
+            <ion-icon name='share-alt'></ion-icon>
+            {{label.read_more}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+  <div *ngIf="showreport" class="faq_margin">
+    <h3>
+      Recomendaciones para reportar un problema.
+    </h3>
+    <img style="width:50% !important;" src="./assets/imgs/srennshot.gif"/>
+    <hr>
+    <h4>
+      Por favor, identifica la pantalla donde sucede el problema y te sugerimos tomar una captura de pantalla. Así el personal de soporte podrá ayudarte de mejor manera. El siguiente botón te llevará al chat de soporte para reportar un error.
+    </h4>
+    <button ion-button color="secondary" round (click)="reportPage()">Soporte</button>
+  </div>
+</ion-content>
+<ion-footer *ngIf="!error" class="faq_bottom" (click) = "reportError()" padding>
+    <button ion-button full>Reportar Error<ion-icon name="warning" style="margin-left:7px;"></ion-icon></button>
+</ion-footer>

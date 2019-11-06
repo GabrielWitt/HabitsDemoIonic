@@ -1,0 +1,22 @@
+page-diet-info {
+    .food-{
+        border-radius: 50%;
+        width: 90px;
+        height: 90px;    
+        margin-left: auto; 
+        margin-right: auto;
+        padding: 7px;
+    }
+
+    .FoodLabel{
+        text-align: center;
+        width: 100%;
+    }
+
+    .info_text{
+        text-align : justify;
+        font-size: 2rem;
+        margin: 5px;
+    }
+
+}

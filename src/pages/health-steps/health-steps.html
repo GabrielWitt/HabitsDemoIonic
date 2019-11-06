@@ -1,0 +1,134 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{label.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card> 
+    <ion-card-header class="header_cards_health">
+      <ion-icon name="walk"></ion-icon>  Actividad                  
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>Numero de actividadtes hoy : {{activities.activity_number}}</ion-col>
+          <ion-col col-12>Total de minutos de ejercicio hoy : {{activities.duration}}</ion-col>
+          <ion-col col-12>Total de distancia recorrida de hoy : {{activities.distance}}</ion-col>
+          <ion-col col-12>Total de calorias quemadas de hoy : {{activities.calories}}</ion-col>
+          <ion-col col-12>Promedio de intensidad de ejercicio de hoy : {{activities.intensity}} calorias por hora</ion-col>
+          <ion-col col-12>Puntos habits de hoy : {{activities.points}}</ion-col>
+          <ion-col col-12>Actividades :</ion-col>
+          <ion-col col-12>{{raw_data}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="animated fadeIn card_data" style="-webkit-transform: translateZ(0) translate3d(0px, 0px, 0px);padding: 16px 16px 5px 16px;">
+    <ion-card-header class="header_cards_health">
+        <ion-icon name="walk"></ion-icon>  {{label.steps_today}}                  
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-row col-10 justify-content-center align-self-center>
+            <label text-center style="color:white; text-align: end !important; font-size: 0;"> Actualizar </label>
+          </ion-row>
+          <ion-col col-2 text-right (click)="UpdateData()">
+              <img style="width:65%;right: 0; position: absolute; bottom: 180%;" src="./assets/icons/refresh.png"> 
+          </ion-col>
+        </ion-row>
+        <ion-row col-12 justify-content-center align-self-center>
+          <label col-6 text-center> {{label.steps_today}}: {{steps_today}} </label>
+          <label col-6 text-center> {{label.goal}}: {{user.steps_goal?user.steps_goal:8000}} </label>
+		    </ion-row>
+        <div>
+          <div col-12 style="display: block">
+            <canvas style="background-color: #FFF !important; border-radius: 4%; width: 100% !important;;" #doughnutCanvas></canvas>
+          </div>
+        </div>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="animated fadeIn card_data" style="-webkit-transform: translateZ(0) translate3d(0px, 0px, 0px);">
+    <ion-card-header class="header_cards_health">
+      <ion-icon name="calendar"></ion-icon>  {{label.week_steps}} 
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row style="margin-top:10px; margin-bottom:10px;">
+            <ion-col col-2 text-left (click)="substractTime()">
+              <img style="width:65%;left: 0; position: absolute;" src="./assets/icons/prev.png">            
+            </ion-col>
+          <ion-row col-8 justify-content-center align-self-center>
+            <label text-center> {{label.from}} {{dateTranslation(startWeek)}} {{label.until}} {{dateTranslation(endWeek)}} </label>
+          </ion-row>
+          <ion-col col-2 text-right (click)="addTime()">
+              <img style="width:65%;right: 0; position: absolute;" src="./assets/icons/next.png"> 
+          </ion-col>
+        </ion-row>
+        <div>
+          <div col-12 style="display: block">
+            <canvas style="background-color: #FFF !important; border-radius: 4%; width: 100%;" #barCanvas></canvas>
+          </div>
+        </div>
+        <ion-row>
+          <ion-col col-12 style="padding-bottom:0px; text-align: center;">
+            <label>{{label.average_week}}: {{stepsAverage}}</label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 style="padding-bottom:0px; text-align: center;">
+            <label>{{label.total_week}}: {{weeksteps}}</label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="selectedMonth" class="animated fadeIn card_data" style="-webkit-transform: translateZ(0) translate3d(0px, 0px, 0px);">
+    <ion-card-header class="header_cards_health">
+      <ion-icon name="analytics"></ion-icon>  {{label.monthly_steps}}
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row style="margin-top:10px; margin-bottom:10px;">
+          <ion-col col-2 text-left (click)="prevMonth()">
+            <img style="width:65%;left: 0; position: absolute;" src="./assets/icons/prev.png">            
+          </ion-col>
+          <ion-row col-8 justify-content-center align-self-center>
+            <label text-center> {{monthLabeltranslator(selectedMonth.month)}} / {{selectedMonth.year}} </label>
+          </ion-row>
+          <ion-col col-2 text-right (click)="nextMonth()">
+              <img style="width:65%;right: 0; position: absolute;" src="./assets/icons/next.png"> 
+          </ion-col>
+        </ion-row>
+        <ion-row col-12 justify-content-center align-self-center>
+          <label col-6 text-center>{{label.average_day}}: {{selectedMonth.steps_day}} </label>
+          <label col-6 text-center>{{label.total_month}}: {{selectedMonth.total_steps}} </label>
+        </ion-row>
+        <!--ion-row style="margin-top:10px; margin-bottom:10px;">
+            <div style="display: block; width:100%" >
+              <div style="display: block; width:100%" >
+                  <canvas style="background-color: #FFF !important; border-radius: 4%;" #resumeCanvas></canvas>
+              </div>
+            </div>
+        </ion-row-->
+        <div>
+        </div>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <!--ion-row col-12 justify-content-center align-self-center>
+      <button ion-button block round (click)="UpdateData()">Actualizar</button>
+  </ion-row>
+  <ion-row col-12 justify-content-center align-self-center>
+      <button ion-button block round (click)="saveSteps()">Guardar</button>
+  </ion-row-->
+</ion-content>

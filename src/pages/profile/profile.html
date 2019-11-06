@@ -1,0 +1,105 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{label.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-list *ngIf="selectedTab == 'Usuario'">
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button style="text-transform: uppercase;width: 100%" (click)="openTab('Usuario')">{{label.user}}</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button style="text-transform: uppercase;width: 100%" (click)="openTab('Empresa')" outline>{{label.company}}</button>
+      </ion-col>
+    </ion-row>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <img-loader class="img-circle"  [src]="user.picture" [fallbackUrl]="'./assets/user_icons/icon0.png'" [fallbackAsPlaceholder]="true"></img-loader>
+      <ion-fab style="right: 17%;" bottom>
+        <button ion-fab tyle="background-color: #36B8EA;" (click)="addCameraPhoto(1)">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-fab>
+      <ion-fab style="right: 67%;" bottom>
+        <button ion-fab tyle="background-color: #36B8EA;" (click)="addCameraPhoto(2)">
+          <ion-icon name="images"></ion-icon>
+        </button>
+      </ion-fab>
+    </ion-item>
+    <!--ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <ion-label col-5 color="primary">Apodo:</ion-label>
+      <ion-input [disabled]="!isOnline" col-7 placeholder="*Opcional" clearInput [(ngModel)]="user.nick_name"></ion-input>
+    </ion-item-->
+	 <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center; white-space:normal">
+      <ion-label col-5 color="primary" style="text-align: left !important;">{{label.email}}:</ion-label>
+	   <ion-label class="selectwidthauto" col-7 style="white-space:normal">{{user.mail}}</ion-label>
+    </ion-item>
+   
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <ion-label col-5 color="primary" style="text-align: left !important;">{{label.name}}:</ion-label>
+      <ion-input [disabled]="!isOnline" class="selectwidthauto" col-7 clearInput [(ngModel)]="user.name" placeholder="Nombre"></ion-input>
+    </ion-item>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <ion-label col-5 color="primary" style="text-align: left !important;">{{label.last_name}}:</ion-label>
+      <ion-input [disabled]="!isOnline" class="selectwidthauto" col-7 clearInput [(ngModel)]="user.last_name" placeholder="Apellido"></ion-input>
+    </ion-item>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <ion-label col-5 color="primary" style="text-align: left !important;">{{label.birthday}}:</ion-label>
+      <ion-datetime class="selectwidthauto" col-7 (click)="hideKeyboard();" style="color:blaxk !important;"  placeholder="Fecha de Nacimiento:" displayFormat="DD/MM/YYYY" [(ngModel)]="user.born_date"></ion-datetime>
+    </ion-item>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <ion-label col-5 color="primary" style="text-align: left !important;">{{label.gender}}:</ion-label>
+      <ion-select class="selectwidthauto" col-7 class="selectwidthauto" col-7 [disabled]="!isOnline" col-7 placeholder="Género:" [(ngModel)]="user.gender" interface="action-sheet" cancelText="Cancelar">
+        <ion-option value='Masculino'>Masculino</ion-option>
+        <ion-option value='Femenino'>Femenino</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="isOnline" style="color:white;background-color: rgb(54, 180, 230);font-size:2rem; margin-bottom: 10px; border-radius: 15px;text-align:center;"
+      (click)="updateData()">
+      {{label.update_button}}
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="selectedTab == 'Empresa'">
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button style="text-transform: uppercase;width: 100%" (click)="openTab('Usuario')" outline>{{label.user}}</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button style="text-transform: uppercase;width: 100%" (click)="openTab('Empresa')">{{label.company}}</button>
+      </ion-col>
+    </ion-row>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <img-loader class="img-circle"  [src]="user.company.logo" [fallbackUrl]="'./assets/placeholder.jpg'" [fallbackAsPlaceholder]="true"></img-loader>
+    </ion-item>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <ion-label col-5 color="primary"  style="text-align: left !important;">{{label.company}}:</ion-label>
+	   <ion-label class="selectwidthauto" col-7>{{user.company.name}}</ion-label>
+    </ion-item>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;">
+      <ion-label col-5 color="primary" style="text-align: left !important;">{{label.department}}:</ion-label>
+      <ion-select class="selectwidthauto" col-7 [disabled]="!isOnline" [(ngModel)]="selectedDepartmentUID" interface="action-sheet" cancelText="Cancelar">
+        <ion-option *ngFor='let department of departments' value='{{department.uid}}'>{{department.department}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;">
+      <ion-label col-5 color="primary" style="text-align: left !important;">{{label.level}}:</ion-label>
+      <ion-select class="selectwidthauto" col-7 [disabled]="!isOnline" [(ngModel)]="selectedPositionUID" interface="action-sheet" cancelText="Cancelar">
+        <ion-option *ngFor='let position of positions' value='{{position.uid}}'>{{position.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <ion-label col-5 color="primary" style="text-align: left !important;">{{label.phone}}:</ion-label>
+      <ion-input [disabled]="!isOnline" col-7 placeholder="*Opcional" readonly [(ngModel)]="user.cell_phone"></ion-input>
+    </ion-item>
+    <ion-item style="margin-bottom: 10px; border-radius: 15px;text-align:center;">
+      <ion-label col-5 color="primary" style="text-align: left !important;">{{label.address}}:</ion-label>
+      <ion-input class="selectwidthauto" col-7 [disabled]="!isOnline" col-7 placeholder="*Opcional" clearInput [(ngModel)]="user.address"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isOnline" style="color:white;background-color: #36B8EA;font-size:2rem; margin-bottom: 10px; border-radius: 15px;text-align:center;"
+      (click)="updateData()">
+      {{label.update_button}}
+    </ion-item>
+  </ion-list>
+</ion-content>

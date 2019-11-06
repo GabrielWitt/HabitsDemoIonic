@@ -1,0 +1,72 @@
+page-reto-team {
+	ion-item-divider{
+		background-color: #E9EEF5 !important;
+		span{
+			float: right;
+			margin-right: 10px;
+		}
+	}
+	
+	.panel-head{
+		background-color: #403B5E !important;
+		color: #fff !important;
+		text-align: center !important;
+		padding: 15px 40px 15px 15px !important;
+		white-space: inherit;
+		font-size: 1.75rem !important;
+		
+		.dias-rest{
+			position: absolute;
+			top: 2px;
+			text-align: center;
+			padding: 2px 114px;
+			padding: 3px 0px;
+			font-size: 1.2rem;
+			width: 100%;
+			padding-right: 25%;
+		}
+	}
+	
+	ion-item{
+		border-bottom: 1px solid #dedede;
+		
+		.item-inner{
+			border-bottom: none !important;
+		}
+		ion-avatar.active{
+			border: 2px solid #ffa700;
+			border-radius: 50%;
+		}
+	}
+	
+	.myDatos{
+		background-color:#00000000;
+		
+		img{
+			border-radius: 50%;
+		}
+		
+		.step{
+			font-size: 50px;
+			text-align: center;
+			max-height: 65px;
+			max-width: 65px;
+			background: #fff;
+			border-radius: 50%;
+			margin-bottom: 6px;
+		}
+		
+		
+	}
+	
+	.description{
+			color: #fff;
+			font-size: 1.5rem;
+			text-align: center;
+			margin-top:15px;
+		}
+	
+	.scroll-content {
+		padding: 0px !important; 
+	}
+}

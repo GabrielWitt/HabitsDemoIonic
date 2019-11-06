@@ -1,0 +1,27 @@
+<ion-card *ngIf="showRemind" color="card-background" no-padding no-margin [ngStyle]="{'width': '100%', 'margin-top': '15px'}" class="animated fadeIn" >
+  <ion-grid>
+    <ion-row col-12 align-items-center [ngStyle]="{'padding-top': '10px'}">
+      <span col-12 no-padding class="big-font make-bold" [ngStyle]="{'margin-bottom': '10px', 'text-transform': 'uppercase'}" text-center>Recordatorios</span>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4 text-center>
+        <button ion-fab outline [disabled]="!userUID" class="reminder-icons" (click)="openAlarm('exercise_reminder','Ejercicio')" ><ion-icon name="football"></ion-icon></button>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <button ion-fab outline [disabled]="!userUID" class="reminder-icons" style="display:inline-block" (click)="openAlarm('medicine_reminder','Medicina')" ><ion-icon name="pulse"></ion-icon></button>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <button ion-fab outline [disabled]="!userUID" class="reminder-icons" style="display:inline-block" (click)="openAlarm('alimentation_reminder','Alimentación')" ><ion-icon name="cafe"></ion-icon></button>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <span class="reminder-text">Ejercicio</span>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <span class="reminder-text">Medicina</span>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <span class="reminder-text">Alimentación</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

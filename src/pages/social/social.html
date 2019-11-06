@@ -1,0 +1,123 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button icon-only (click)="closeWindow()">
+          <ion-icon name="arrow-back" style="padding-left: 8px;"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title>{{label.title}}</ion-title>
+    <ion-buttons end>
+        <button ion-button clear (click)="newSocialChat()">{{label.newgroup}}</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+
+    <!--<div class="row" style="width: 100%; text-align: center; margin-left: 1%; background-color: white;">
+      <div [ngClass]="myGroupshow == true ? 'onSelectedOption' : 'notSelectedOption'" (click)="myGroup()">{{label.mygroups}}</div>
+      <div [ngClass]="myGroupshow == false ? 'onSelectedOption' : 'notSelectedOption'" (click)="allGroup()">{{label.allgroups}}</div>
+    </div>-->
+
+    <ion-list>
+        <!-- PESTAÑA DE COACH-->
+        <ion-list-header>
+          {{label.coachs}}
+        </ion-list-header>
+        <ion-item class="chat-item" *ngFor="let chatBotRoom of chatBotRooms" [hidden]="!getItemview(chatBotRoom.joined)" (click)="goChatBot(chatBotRoom.BotUid)"> 
+            <ion-thumbnail item-left>
+              <img [src]="chatBotRoom.imagen" style="width: 80px !important; height: 80px !important;">
+            </ion-thumbnail>
+         <h2>{{chatBotRoom.name}} </h2> 
+        </ion-item>
+        <!-- PESTAÑA DE MIS GRUPOS-->
+        <ion-list-header>
+          {{label.groups}}
+        </ion-list-header>
+        <div *ngFor="let chatRoom of getArraData(SocialRooms)">
+          <div *ngIf="chatRoom.joined">
+            <ion-item *ngIf="chatRoom.joined" (click)="goChatGroup(chatRoom)" class="chat-item"> 
+              <ion-thumbnail item-left>
+                 <!--<img [src]="chatRoom.picture">-->
+                <img-loader [src]="chatRoom.picture" [fallbackUrl]="'./assets/imgs/group.png'" [fallbackAsPlaceholder]="true"></img-loader>
+              </ion-thumbnail>
+              <h2>{{chatRoom.name}}</h2> 
+              <p>{{chatRoom.description}}</p>
+              <ion-note item-end>
+                <ion-badge *ngIf="chatRoom.NotRead" color="danger" item-end class="animated zoomIn">{{chatRoom.NotRead}}</ion-badge>
+              </ion-note>
+            </ion-item>
+          </div>
+        </div>
+        <div *ngFor="let timRoom of TeamRooms index as i">
+          <div *ngIf="timRoom.joined">
+            <ion-item (click)="goChatGroup(timRoom,'team')" class="chat-item"> 
+              <ion-thumbnail item-left>
+                 <!--<img [src]="chatRoom.picture">-->
+                <img-loader [src]="timRoom.picture" [fallbackUrl]="'./assets/imgs/group.png'" [fallbackAsPlaceholder]="true"></img-loader>
+              </ion-thumbnail>
+              <h2>{{timRoom.name}}</h2> 
+              <p>{{timRoom.description}}</p>
+              <ion-note item-end>
+                <ion-badge *ngIf="timRoom.NotRead" color="danger" item-end class="animated zoomIn">{{timRoom.NotRead}}</ion-badge>
+                <ion-icon name="lock"></ion-icon>
+              </ion-note>
+            </ion-item>
+          </div>
+        </div>
+        <!-- PESTAÑA DE OTROS GRUPOS-->
+        <ion-list-header>
+          {{label.teams}}
+        </ion-list-header>
+        <div *ngFor="let chatRoom of getArraData(SocialRooms)">
+          <div *ngIf="!chatRoom.joined">
+            <ion-item *ngIf="!chatRoom.joined && chatRoom.type == 'group'" class="chat-item">
+                <ion-thumbnail item-left>
+                  <img-loader [src]="chatRoom.picture" [fallbackUrl]="'./assets/imgs/group.png'" [fallbackAsPlaceholder]="true"></img-loader>
+                  <!--<img [src]="chatRoom.picture">-->
+                </ion-thumbnail>
+                <h2>{{chatRoom.name}}</h2> 
+                <p>{{chatRoom.description}}</p>
+                <button ion-button color="#36b8ea" outline item-end (click)="joinChatGroup(chatRoom)">Unirse</button> 
+            </ion-item>
+          </div>
+        </div>
+    </ion-list>
+</ion-content>
+<ion-footer style="background-color: #F8F8F8">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('DashboardPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="home"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">INICIO</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('SocialPage')">
+          <ion-row col-12 class="dash_icons" style="color:#36A2EB !important;"><ion-icon name="people"></ion-icon></ion-row>
+          <ion-row col-12 style="color:#36A2EB !important;text-align: center;font-size: 1.2rem;margin-left: 3%;">CHATS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('RetoPasosPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="calendar"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">RETOS</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('ranking')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="trophy"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">RANK</ion-row>
+        </div>
+      </ion-col>
+      <ion-col class="dash_tabs">
+        <div (click)="goToPage('MenuPage')">
+          <ion-row col-12 class="dash_icons"><ion-icon name="menu"></ion-icon></ion-row>
+          <ion-row col-12 style="text-align: center;font-size: 1.2rem;margin-left: 3%;">MENU</ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,0 +1,58 @@
+<ion-card color="card-background" no-padding no-margin [ngStyle]="{'width': '100%'}" class="animated fadeIn">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 style="top: 10px; position: relative;" ><span col-12 no-padding class="big-font make-bold animated fadeIn" style="padding-bottom: 15px;">{{ user?  user.name+' '+user.last_name : 'Nombre Apelido' }}</span></ion-col>
+      <ion-col *ngIf="isOnline && user" col-6 text-right class="edit-style small-font" (click)="profile()">{{label.profile}}</ion-col>
+    </ion-row>
+    <ion-row align-items-center>
+      <ion-col col-7>
+        <ion-row align-items-center>
+          <span col-12 no-padding style="top: -8px; position: relative;" class="medium-font">{{label.level}}: {{level}} / 5</span>
+          <span col-12 no-padding class="medium-font">{{label.points}}: {{userpoints}}</span>
+          <progress-bar [progress]="pointbar" col-12 no-padding></progress-bar>
+          <span col-12 no-padding class="medium-font">{{label.wellness}}:</span>
+          <progress-bar [progress]="user? user.wellness : 0" col-12 no-padding></progress-bar>
+		</ion-row >
+      </ion-col>
+      <ion-col col-5 no-padding>
+          <img-loader *ngIf="user" [src]="user.picture" [fallbackUrl]="'./assets/user_icons/icon0.png'" [fallbackAsPlaceholder]="true" (click)=" presentActionSheet()" useImg></img-loader>
+          <img-loader *ngIf="!user" [src]="'./assets/user_icons/icon0.png'" (click)="presentActionSheet()" useImg></img-loader>
+      </ion-col>
+    </ion-row>
+	 <ion-row align-items-center style="margin-top: -20px;">
+      <ion-col col-7>
+        <ion-row align-items-center (click)="UpdateSteps()">
+           <span col-12 no-padding class="medium-font"><a>{{label.steps}}: </a>  {{stepsToday}}/{{user?(user.steps_goal ? user.steps_goal : 5000):5000}}</span>
+          <progress-bar [progress]="step_percent" col-12 no-padding></progress-bar> 
+        </ion-row >
+      </ion-col>
+      <ion-col col-5 no-padding>
+          <button ion-button style="border-radius: 100%;height: 34px; width: 34px;font-size: 14px; left: 0;" (click)="openPage('steps')"><ion-icon name="walk"></ion-icon></button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!healthProvider.PERMISIONS">    
+      <button ion-button block round (click)="openPage('steps')"> 
+        Activar permisos de salud    	
+      </button>
+  </ion-grid>
+</ion-card>
+
+<ion-card color="card-background" no-padding no-margin [ngStyle]="{'width': '100%','background-color':'white'}" class="animated fadeIn">
+  <ion-grid no-padding class="pie_row" style="background-repeat: no-repeat !important;background-position: left bottom;">
+    <ion-row col-12 align-items-center [ngStyle]="{'padding-top': '10px'}">
+      <span col-12 no-padding class="big-font make-bold" [ngStyle]="{'margin-bottom': '10px', 'text-transform': 'uppercase'}" text-center>Pasos de hoy</span>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 class="pie_col"> 
+        <canvas class="pie_style" #doughnutCanvas></canvas> 
+        <div class="donut-inner">{{stepsToday}}</div>
+      </ion-col>
+      <ion-col col-6 class="pie_col">
+          <ion-row><ion-col col-7><ion-icon class="check_steps" name="checkmark-circle" *ngIf="stepsToday>6000"></ion-icon><ion-icon name="radio-button-on" class="uncheck_steps" *ngIf="6001>this.stepsToday"></ion-icon> 6000 pasos</ion-col><ion-col col-4>3 Pts</ion-col></ion-row>
+          <ion-row><ion-col col-7><ion-icon class="check_steps" name="checkmark-circle" *ngIf="stepsToday>8000"></ion-icon><ion-icon name="radio-button-on" class="uncheck_steps" *ngIf="8001>this.stepsToday"></ion-icon> 8000 pasos</ion-col><ion-col col-4>5 Pts</ion-col></ion-row>
+          <ion-row><ion-col col-7><ion-icon class="check_steps" name="checkmark-circle" *ngIf="stepsToday>10000"></ion-icon><ion-icon name="radio-button-on" class="uncheck_steps" *ngIf="10001>this.stepsToday"></ion-icon> 10000 pasos</ion-col><ion-col col-4>7 Pts</ion-col></ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

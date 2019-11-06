@@ -1,0 +1,29 @@
+<!--
+  Generated template for the ModalNivelHabitPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Nivel de Habito</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<p>Del 1 al 10, &iquest;qu&eacute; tan autom&aacute;tico fue hacer tu h&aacute;bito?</p>
+	<ion-item>
+	  <ion-range [(ngModel)]="resp" min="1" max="10">
+		<ion-label range-left>1</ion-label>
+		<ion-label range-right>10</ion-label>
+	  </ion-range>
+	 </ion-item>
+	 <span style="width:35%; float:left">Hice mi h&aacute;bito autom&aacute;ticamente, lo inicie antes de darme cuenta.</span>
+	 <span style="    width: 35%;float: right;text-align: right;">Tuve que pensar y acordarme de hacer mi h&aacute;bito</span>
+	<br>
+		<button ion-button full (click)="cerrar()">Aceptar</button>
+	 
+</ion-content>

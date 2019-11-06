@@ -1,0 +1,34 @@
+page-profile {
+    .scroll-content{
+        background-color: #f0eff5;
+    }
+    
+    .img-circle {
+      border-radius: 50%;
+      width: 150px!important;
+      height: 150px!important;
+      margin: auto;
+      background-size: cover!important;
+      background-position: center!important;
+      background-color: #eee !important;
+      border: solid 1px #c8c7cc;
+    }
+  
+    .edit-style{
+      text-decoration: underline;
+      color: #9e9e9e;
+    }	
+
+    .selectwidthauto {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .alert-ios .alert-radio-label{ white-space: pre-line !important;}
+    .alert-md .alert-radio-label{ white-space: pre-line !important;}
+    .alert-wp .alert-radio-label{ white-space: pre-line !important;}
+
+    .select-ios .select-icon {
+      width: 16px;
+    }
+}

@@ -1,0 +1,19 @@
+<ion-card *ngIf="showDiet &&checkCode('MED')" color="card-background" no-padding no-margin [ngStyle]="{'width': '100%', 'margin-top': '15px'}" [ngClass]="{'animated':true, 'infinite': false, 'zoomOutRight': deleteAnimation, 'pulse':true}">
+  <ion-grid>
+    <ion-row col-12 align-items-center [ngStyle]="{'padding-top': '10px'}">
+      <span col-12 no-padding class="big-font make-bold" [ngStyle]="{'margin-bottom': '10px', 'text-transform': 'uppercase'}" text-center>Zona Medix</span>
+    </ion-row>
+    <ion-row>
+		<ion-col col-4 text-center>
+			<ion-chip ion-button round color="primary" style="min-width: 115; display: block;" (click)="openPage('diet')">Mi dieta</ion-chip>
+		</ion-col>
+		<ion-col col-4 text-center>
+			<ion-chip ion-button round color="primary" style="min-width: 115; display: block;" (click)='navCtrl.push("RetoPasosPage")'>Retos</ion-chip>
+		</ion-col>
+		<ion-col col-4 text-center>
+			<ion-chip ion-button round color="primary" style="min-width: 115; display: block;" (click)='navCtrl.push("MiprogresoPage")'>Progreso</ion-chip>
+		</ion-col>
+     
+    </ion-row>
+  </ion-grid>
+</ion-card>

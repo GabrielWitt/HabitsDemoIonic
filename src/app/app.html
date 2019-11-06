@@ -1,0 +1,44 @@
+<ion-menu [content]="content" >
+    <ion-header>
+      <ion-toolbar>
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-col col-12 align-self-center text-center>
+              <img style="margin-top:-20px;margin-bottom: -20px; width: 90%" src="./assets/img/LogoHabitsText.png">
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-content>
+      <ion-list color="light">
+        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          <ion-icon [ios]="p.ios_icon" [md]="p.md_icon" color="primary">
+            {{getMenuTitle(p.title)}} <ion-spinner *ngIf="p.title=='INSPIRACIÓN' && !newsprovider.checkNews()" style="width: 1.6rem; height: 1.6rem; margin-left: 15px;" name="circles"></ion-spinner>
+          </ion-icon>
+        </button>
+        <ion-item-divider color="light"></ion-item-divider>
+        <!--button menuClose ion-item>
+            Ajustes
+          </button-->
+        <button menuClose ion-item (click) = "changeLanguage()">
+          {{getMenuTitle('language')}}
+        </button>
+        <button menuClose ion-item (click) = "privacyPage()">
+          {{getMenuTitle('privacy')}}
+        </button>
+        <button menuClose ion-item (click) = "reportPage()">
+          {{getMenuTitle('report')}}
+        </button>
+        <button menuClose ion-item (click) = "reportAbout()">
+          {{getMenuTitle('about')}}
+        </button>
+      </ion-list>
+    </ion-content>
+  
+  </ion-menu>
+  
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="authProvider.rootPage" #content swipeBackEnabled="false"></ion-nav>
+  

@@ -1,0 +1,45 @@
+page-modal-test-article {
+	ion-header{
+		height: 50px!important;
+		min-height: 50px!important;
+
+		ion-navbar{
+			height: 50px!important;
+			min-height: 50px!important;
+			
+			.toolbar-content-ios{
+				width: 100%!important;
+
+				ion-title{
+					padding: 0px 40px 0px 40px!important;
+				}
+			}
+		}
+	}	
+	.label-custon{
+		white-space: normal!important;
+	}
+	h6{
+		font-weight: bold;
+	    padding: 14px 0px 5px 0px!important;
+	}
+	
+	ion-footer{
+		height: 45px;
+		background: #f8f8f8!important;
+		border-top: #eee!important;
+			button{
+				height: 100%!important;
+			    margin: 0px!important;
+			    color: black!important;
+			    border-radius:0px!important;
+			}
+			button:first-child{
+				border-right: solid!important;
+				width: 49%!important;
+			}
+			button:last-child{
+				width: 49%!important;
+			}
+	}
+}

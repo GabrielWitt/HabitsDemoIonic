@@ -1,0 +1,41 @@
+<!--
+  Generated template for the LessonPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar hideBackButton class="centerA">
+      <ion-buttons left>
+        <button ion-button icon-only (click)="closeWindow()">
+          <ion-icon name="arrow-back" style="padding-left: 8px;"></ion-icon>
+        </button>
+      </ion-buttons>
+    <div style="display: inline-flex; font-size: 2.3rem; text-align: center;">
+      <div style="width: 30px; margin-right: 5px;"><img style="height: 30px; border-radius: 50%;" [src]="lesson.picture"></div>
+      <div>{{lesson.title}}</div>
+    </div>
+    <ion-buttons end>
+        <button style="font-size: 2.5rem !important;" ion-button clear (click)="unsubscribeLesson()"><ion-icon name="trash"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+        <ion-col col-4 *ngFor="let topic of lesson.topics index as i" (click)="openTopic(topic,i)">
+          <div class="RoundTopic"> 
+            <img class="topicIMG" [class.classOn]="i == avaliable" [class.classDone]="getLessonAdvance(i)" src="./assets/imgs/transparencia.png">
+            <div class="overIMG" col-12>{{i+1}}</div>
+            <img *ngIf="getLessonAdvance(i)" class="overIMGlock" src="./assets/imgs/done.png">
+            <img *ngIf="getLock(i)" class="overIMGlock" src="./assets/imgs/lock.png">
+          </div>
+          <div class="centerA">{{topic.name}} </div>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

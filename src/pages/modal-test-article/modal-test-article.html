@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar>
+  	<ion-buttons left>
+  		<button ion-button icon-left (click)="cerrar()">
+          <ion-icon name="close" color="dark">
+          </ion-icon>
+        </button>
+  	</ion-buttons>
+    <ion-title no-padding>{{test.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+	<h6 no-margin margin-left margin-right text-center>
+		{{pregunta.text}}
+	</h6>
+	<ion-list radio-group no-margin [(ngModel)]="respuesta" name="respuesta">
+	  <ion-item *ngFor='let opcion of pregunta.opciones'>
+	    <ion-label class="label-custon">{{opcion}}</ion-label>
+	    <ion-radio value="{{opcion}}" ></ion-radio>
+	  </ion-item>
+	</ion-list>
+	<p margin-top  margin-left [hidden]="respuesta">Por favor Seleccione una de las opciones</p>
+</ion-content>
+
+<ion-footer>
+	<button ion-button clear (click)="cerrar()">Cancelar</button>
+	<button ion-button clear [disabled]="!respuesta" (click)="guardarRespuesta()">Enviar</button>
+</ion-footer>

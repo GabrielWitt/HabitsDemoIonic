@@ -1,0 +1,25 @@
+<ion-content no-padding>
+  <div class="splash-bg" padding>
+    <ion-grid>
+      <ion-row style="margin-bottom: 20px;">
+        <ion-title style="color: white !important; text-align: center"><p style="color: white !important; text-align: center">{{SIGN.title}}</p></ion-title>
+      </ion-row>
+      <ion-row style="height:70%; text-align: center">
+        <ion-label class="lblNormalWhite" style="width:100%; text-align: center">            
+          <img id="IMAGEN" style="width:65%; background-color:transparent;" src="./assets/img/LogoHabitsText.png">
+        </ion-label>
+      </ion-row>
+      <ion-row style="height:70%; text-align: center">
+          <h3 style="text-align: center; color: white;margin-left: auto; margin-right: auto; display: block;" *ngFor="let line of SIGN.text.split('-salto-')">{{line}}</h3>
+      </ion-row>
+      <ion-row class="colBottomBorder" style="margin-bottom:11px;">
+      </ion-row>
+    </ion-grid>
+    <ion-grid style="margin-bottom: 20px;">
+      <button ion-button round block class="btnBlueRounded" (click)="openLink()">{{SIGN.button}}</button>
+      <button *ngIf="!SIGN.logout" ion-button round block class="btnTransparentRounded" (click)="checkSign()">{{SIGN.button2?SIGN.button2:'Regresar'}} </button>
+      <button *ngIf="SIGN.logout" ion-button round block class="btnTransparentRounded" (click)="signOut()">SALIR</button>
+    </ion-grid>
+  </div>      
+</ion-content>
+

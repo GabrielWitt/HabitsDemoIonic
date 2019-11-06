@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="closeChat()">
+        <ion-icon name="arrow-back" style="padding-left: 8px;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+    <div class="cont-img-group" (click)="showGroupInfo()">
+      <div>
+        <!--<img style="height: 30px; border-radius: 50%;" [src]="chatBotRoom.picture">-->
+        <img-loader style="margin-left: auto; margin-right: auto; display: -webkit-inline-box;" [src]="chatBotRoom.picture" ></img-loader>
+      </div>
+      <div>
+        {{chatBotRoom.name}}  
+        <span class="subtitle">{{test?'threshold: '+threshold:''}}</span>
+        <p class="subtitle">
+          {{ isOnline? subTitle : label.connecting}}
+          {{test?'msj: '+chatBotRoom.messages.length+' Seg: '+time+' scrollActive '+scrollActive:''}}       
+        </p>
+     </div>
+    </div>
+    </ion-title>
+    <ion-buttons end *ngIf="(user.rol=='user'&&!chatBotRoom.uid.includes('_informative'))||user.rol=='admin'">
+      <button *ngIf="authProvider.AppIsOnline()" ion-button icon-only (click)="presentActionSheet()">
+        <ion-icon name="attach" style="padding-left: 8px;"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content (ionScrollStart)="onScrollStart()" (ionScrollEnd)="end()" style="background-color: #f0eff5;" [ngClass]="{'no-pd-b':user.rol=='user'&&chatBotRoom.uid.includes('_informative')}">
+  <!-- infinity scroll-->
+  <ion-infinite-scroll [hidden]="!scrollActive" #infiniteScroll position="top" [threshold]="threshold" [enabled]="scrollActive" (ionInfinite)="$event.waitFor(getMore($event))">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <!--fin infinity scroll-->
+  <ion-list no-lines class="chat-list"  #scrollMi>
+    <div *ngFor="let chatMessage of chatBotRoom.messages;">
+      <ion-list-header *ngIf="checkNotview(chatMessage.timestamp.toDate())" class="animated" style="background-color: grey; color:black; text-align:center; ">
+        <button ion-button color="light" round (click)='notview = "0x"'>{{notread==10?'MÁS DE '+notread:notread}} MENSAJES NO LEIDOS</button></ion-list-header>
+      <ion-item class="chat-item">
+        <!-- Burbuja del bot -->
+        <ion-avatar item-left col-2 item-left *ngIf="chatMessage.user != user.uid">
+          <img-loader style="margin-left: auto; margin-right: auto; display: -webkit-inline-box;" [src]="getImg(chatMessage.user)" [fallbackUrl]="'./assets/user_icons/icon0.png'" [fallbackAsPlaceholder]="true" [useImg]="true"></img-loader>
+          <div style="text-align: center; font-size:0.9rem">{{ user_names[chatMessage.user] }}</div>
+        </ion-avatar>
+        <div class="you animated" [class.fadeIn]="i == (chatBotRoom.messages.length - 1)" *ngIf="chatMessage.user != user.uid">
+          <div id="TEXTO" *ngIf="chatMessage.type == 'text'" [innerHTML]="chatMessage.message" style="color:white;"></div>
+          <div id="LINK" *ngIf="chatMessage.type == 'link'">
+            {{getChatPart(chatMessage.message,0)}} <a style="color:dimgray" (click)="openBrowse(chatMessage.message)">{{getChatPart(chatMessage.message,1)}}</a>{{getChatPart(chatMessage.message,2)}}
+          </div>
+          <div id="VIDEO" *ngIf="chatMessage.type == 'video'">
+            {{getChatPart(chatMessage.message,0)}} <iframe width="100%" [src]="getChatPart(chatMessage.message,1) | sanitize: 'resourceUrl'" frameborder="0" allowfullscreen></iframe>{{getChatPart(chatMessage.message,2)}}
+          </div>
+          <div id="IMG" class="noUser" *ngIf="chatMessage.type == 'img'">
+            <!--Esta verificando si la imagen esta en el dispositivo, o si ya verifico pero la imagen no existe en el dispositivo-->
+            <img width="100%" *ngIf="!chatMessage.src||chatMessage.src&&chatMessage.src=='NoFile.png'" #imageToView src="assets/placeholder.jpg">
+            <ion-fab *ngIf="chatMessage.src&&chatMessage.src=='NoFile.png'" top class="descargar">
+              <button ion-fab mini color="light" (click)="chatMessage.src=chatMessage.message" >
+                <ion-icon name="download"></ion-icon>
+              </button>
+            </ion-fab>
+
+            <!--En este caso la imagen ya esta cacheada en el dispositivo, o la va a cachear -->
+            <img-loader *ngIf="chatMessage.src&&chatMessage.src==chatMessage.message"  style="margin-left: auto; margin-right: auto; display: -webkit-inline-box;" width="100%" #imageToView [src]="chatMessage.message" (tap)="tapEvent(imageToView)" useImg></img-loader>
+          </div>
+          <div class="fecha">{{ chatMessage.timestamp.toDate() | date:'dd-MM-yyyy H:mm:ss a' }}</div>
+        </div>
+        <!-- Burbuja del usuario -->
+        <ion-avatar item-right col-2 item-right *ngIf="chatMessage.user == user.uid">
+          <img-loader style="margin-left: auto; margin-right: auto; display: -webkit-inline-box;" [src]="user_icon" [fallbackUrl]="'./assets/user_icons/icon0.png'" [fallbackAsPlaceholder]="true" [useImg]="true"></img-loader>
+          <div style="text-align: center; font-size:0.9rem">{{ user_names[chatMessage.user] }}</div>
+        </ion-avatar>
+        <div class="me animated" [class.fadeIn]="i == (chatBotRoom.messages.length - 1)" *ngIf="chatMessage.user == user.uid">
+          <div id="TEXTO" *ngIf="chatMessage.type == 'text'" [innerHTML]="chatMessage.message" style="color:#36b8ea;"></div>
+          <div id="LINK" *ngIf="chatMessage.type == 'link'">
+            {{getChatPart(chatMessage.message,0)}} <a style="color:steelblue" (click)="openBrowse(chatMessage.message)">{{getChatPart(chatMessage.message,1)}}</a>{{getChatPart(chatMessage.message,2)}}
+          </div>
+          <div id="VIDEO" *ngIf="chatMessage.type == 'video'">
+            {{getChatPart(chatMessage.message,0)}} <iframe width="100%" [src]="getChatPart(chatMessage.message,1) | sanitize: 'resourceUrl'" frameborder="0" allowfullscreen></iframe>{{getChatPart(chatMessage.message,2)}}
+          </div>
+          <div id="IMG" *ngIf="chatMessage.type == 'img'">
+            <!--Esta verificando si la imagen esta en el dispositivo, o si ya verifico pero la imagen no existe en el dispositivo-->
+            <img width="100%" *ngIf="!chatMessage.src||chatMessage.src&&chatMessage.src=='NoFile.png'" #imageToView src="assets/placeholder.jpg">
+            <ion-fab *ngIf="chatMessage.src&&chatMessage.src=='NoFile.png'" top class="descargar">
+              <button ion-fab mini color="light" (click)="chatMessage.src=chatMessage.message" >
+                <ion-icon name="download"></ion-icon>
+              </button>
+            </ion-fab>
+
+            <!--En este caso la imagen ya esta cacheada en el dispositivo, o la va a cachear -->
+            <img-loader *ngIf="chatMessage.src&&chatMessage.src==chatMessage.message"  width="100%" #imageToView [src]="chatMessage.message" (tap)="tapEvent(imageToView)" useImg></img-loader>
+          </div>
+          <div class="fecha">{{ chatMessage.timestamp.toDate() | date:'dd-MM-yyyy H:mm:ss a' }}</div>
+        </div>
+      </ion-item>
+    </div>
+    <ion-item *ngIf="chatBotRoom.sincronizando" class="sincronizando">
+      <p padding-left>
+        <ion-icon color="danger" name="information-circle"></ion-icon>
+        <span>Sincronizando mensajes....</span>
+        <ion-spinner></ion-spinner>
+      </p>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom class="btnBottom" *ngIf="bottom">
+    <button *ngIf="bottom" ion-fab mini (click)="chatScrollBottom(false)">
+      <ion-icon name="arrow-down"></ion-icon>
+    </button>
+    <ion-badge color="danger" *ngIf="chatBotRoom.NotRead>0" class="animated zoomIn bagde-p" [ngClass]="{'l-2':chatBotRoom.NotRead>9&&chatBotRoom.NotRead<100,'l-3':chatBotRoom.NotRead>99}">{{chatBotRoom.NotRead}}</ion-badge>
+  </ion-fab>
+</ion-content>
+
+<ion-footer style="height: 5rem; background-color: #fff;" *ngIf="(user.rol=='user'&&!chatBotRoom.uid.includes('_informative'))||user.rol=='admin'">
+  <ion-toolbar>
+    <textarea style="width: 100%;height: 4.4rem; border: 0;"  cols="50" row="3" type="text" [(ngModel)]='query' (keyup)="writing($event)" (paste)="writing('paste')" (keypress)="enterPress($event.keyCode)" [disabled]="!isOnline" placeholder="{{label.placeholder}}"></textarea>
+    <ion-buttons end>
+      <button ion-button icon-end (click)='send()' class="center-b" [disabled]="!activeSend&&chatBotRoom.sincronizando">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
