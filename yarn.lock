@@ -1601,10 +1601,10 @@ cordova-plugin-health@^1.1.3:
   resolved "https://registry.yarnpkg.com/cordova-plugin-health/-/cordova-plugin-health-1.1.3.tgz#db5179d32f0d053d38ed5b16331109010a8a7495"
   integrity sha512-hX2C95AetTbeQ5OXOu7xugDQhJVhSe7hnbmN3EJccbRvy5dN/vaWE/MaYhdzZxrOzYSd2V/z6lLJliWVX5bRjA==
 
-cordova-plugin-inappbrowser@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-inappbrowser/-/cordova-plugin-inappbrowser-3.0.0.tgz#d4ae00d36676210751057ad258ae4ad4a9161ada"
-  integrity sha1-1K4A02Z2IQdRBXrSWK5K1KkWGto=
+cordova-plugin-inappbrowser@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-inappbrowser/-/cordova-plugin-inappbrowser-6.0.1.tgz#0a4573129f3506a10c228c123415b8d810bb7ee8"
+  integrity sha512-Kx5fNUVJGh2MOWhloEZRmISnX/JEGs2ZAUK/LXBTj/6YcCJt2tc4mc1HypgEgiyINxPEoDUI/MeFGXdoEU8RxA==
 
 cordova-plugin-ionic-keyboard@^2.1.3:
   version "2.1.3"
