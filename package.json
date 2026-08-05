@@ -41,7 +41,7 @@
     "blob-util": "^2.0.2",
     "canvas-confetti": "^0.3.0",
     "chart.js": "^2.7.3",
-    "cordova-browser": "^5.0.4",
+    "cordova-browser": "^7.0.0",
     "cordova-plugin-androidx": "^1.0.2",
     "cordova-plugin-androidx-adapter": "^1.1.0",
     "cordova-plugin-appsee": "^2.6.2",
